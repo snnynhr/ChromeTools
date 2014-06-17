@@ -1,0 +1,21 @@
+body
+{
+  min-width: 100px;
+  margin: 0px;
+  font-family: Segoe UI, Arial, sans-serif;
+  font-size: 13px;
+  color: #545454;
+  background-color: #f8f6f2;
+}
+
+header
+{
+  height: 100px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid #e1ddd8;
+}
+
+#run
+{
+  position: middle;
+}
