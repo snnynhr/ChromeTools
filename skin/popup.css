@@ -16,6 +16,15 @@ header
   margin-top: 15px;
   border-bottom: 1px solid #888888;
 }
+#icon
+{
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin-top: -5px;
+  margin-right: -7px;
+  vertical-align: top;
+}
 #list
 {
   font-size: 16px;
@@ -23,7 +32,7 @@ header
 #logo
 {
   position: relative;
-  width: 130px;
+  width: 145px;
   font-size: 19px;
   font-weight: bold;
   margin: 0px auto;

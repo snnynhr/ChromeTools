@@ -4,6 +4,7 @@
 <link rel="stylesheet" type="text/css" href="skin/popup.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ChromeTools</title>
+<script src="popup.js"></script>
 <style type="text/css" >
 body
 {
@@ -13,17 +14,19 @@ body
 </style>
 </head>
   <header>
-  	<div id="logo"><span style="color:red;">Chrome</span><span style = "color:black;">Tools</span></div>
+  	<div id="logo">	
+  	<img id = "icon" src="icons/ct128.png"> </img>
+  	<span style="color:#ee6f2a;">hrome</span><span style = "color:black;">Tools</span></div>
   </header>
   <body>
-  <div id="cookies">
-  	Clear Cookies
-  </div>
-  <div id = "history">
-  	Reset History
-  </div>
-  <div id = "popup">
-  	Popup Blocker <span id ="popup_status" style="color:green;"> ON </span>
-  </div>
+	  <div id="cookies">
+	  	Clear Cookies
+	  </div>
+	  <div id = "history">
+	  	Reset History
+	  </div>
+	  <div id = "popup">
+	  	Popup Blocker <span id ="popup_status" style="color:green;">ON</span>
+	  </div>
   </body>
 </html>
