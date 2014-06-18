@@ -13,15 +13,15 @@
 	"https://*/*",
   "cookies"
   ],
-  /*"browser_action": {
-      "default_icon": "",
+  "browser_action": {
+      //"default_icon": "",
       "default_popup": "popup.html",
       "default_title": "ChromeTools"
-   },*/
+   },
    "background" : {
 		"page": "background.html",
 		"persistent": true
-   },
+   }
    /*"icons": {
       "128": "icons/128.png",
       "16": "icons/16.png",
