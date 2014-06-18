@@ -3,7 +3,7 @@
 
   "name": "ChromeTools",
   "description": "ChromeTools",
-  "version": "0.0.0.5",
+  "version": "0.0.1.0",
 
   "permissions": [
   "tabs",
@@ -14,19 +14,19 @@
   "cookies"
   ],
   "browser_action": {
-      //"default_icon": "",
+      "default_icon": "icons/ct19.png",
       "default_popup": "popup.html",
       "default_title": "ChromeTools"
    },
    "background" : {
 		"page": "background.html",
 		"persistent": true
+   },
+   "icons": {
+      "128": "icons/ct128.png",
+      "16": "icons/ct16.png",
+      "19": "icons/ct19.png",
+      "32": "icons/ct32.png",
+      "48": "icons/ct48.png"
    }
-   /*"icons": {
-      "128": "icons/128.png",
-      "16": "icons/16.png",
-      "19": "icons/19.png",
-      "32": "icons/32.png",
-      "48": "icons/48.png"
-   }*/
 }
