@@ -1,12 +1,12 @@
 function togglePopups()
 {
-	if(document.getElementById("enabled").classList.contains("off"))
+	if(document.getElementById("popup").classList.contains("off"))
 	{
 		chrome.contentSettings['popups'].set({
 		        'primaryPattern': '<all_urls>',
 		        'setting': 'block'
 		      });
-		document.getElementById("enabled").classList.toggle("off");
+		document.getElementById("popup").classList.toggle("off");
 	}
 	else
 	{
@@ -14,7 +14,7 @@ function togglePopups()
 		        'primaryPattern': '<all_urls>',
 		        'setting': 'allow'
 		      });
-		document.getElementById("enabled").classList.toggle("off");
+		document.getElementById("popup").classList.toggle("off");
 	}
 }
 function toggleCookies()
@@ -23,28 +23,38 @@ function toggleCookies()
 	{
 		chrome.contentSettings['cookies'].set({
 		        'primaryPattern': '<all_urls>',
-		        'setting': 'block'
+		        'setting': 'allow'
 		      });
 		document.getElementById("cookies").classList.toggle("off");
+		document.getElementById("cookies-text").innerHTML = "Cookies Enabled";
 	}
 	else
 	{
 		chrome.contentSettings['cookies'].set({
 		        'primaryPattern': '<all_urls>',
-		        'setting': 'allow'
+		        'setting': 'block'
 		      });
 		document.getElementById("cookies").classList.toggle("off");
+		document.getElementById("cookies-text").innerHTML = "Cookies Disabled";
 	}
 }
 function clearCookies()
 {
-	document.getElementById("clickhide").innerHTML = '<progress id = "pbar" value="0" max="100"></progress>';
+	document.getElementById("clrcookies").innerHTML = '<progress id = "pbar" value="0" max="100"></progress>';
 	var i;
-	for(i=1; i<=100; i++)
-	{
-		document.getElementById("pbar").value = i + "";
-	}
-	document.getElementById("clickhide").innerHTML = '<div class="icon"></div><span> Clear Cookies</span>';
+
+	chrome.cookies.getAll({}, function(arr) {
+			var len = arr.length;
+			var i = 0;
+			arr.forEach(function(a){
+				chrome.extension.sendMessage({msg: a.domain +" " + a.name});
+			chrome.cookies.remove({url:"http"+(a.secure?"s":"")+"://"+a.domain+a.path,name:a.name,storeId:a.storeId});
+			i = i + 1;
+			//document.getElementById("pbar").value = 100*i/len;
+			});
+		}
+	);
+	document.getElementById("clrcookies").innerHTML = '<div class="icon"></div><span> Cleared </span>';
 }
 function init()
 {
@@ -54,30 +64,38 @@ function init()
 	    incognito = current.incognito;
 	    url = current.url;
       	chrome.contentSettings.popups.get({
-            'primaryUrl': url,
+            'primaryUrl': "https://www.google.com/*",
             'incognito': incognito
         	},
           	function(details) {
             	if(details.setting=="allow")
- 					document.getElementById("enabled").classList.add("off");           	
-            	else if(document.getElementById("enabled").classList.contains("off"))
-            		document.getElementById("enabled").classList.toggle("off");
+ 					document.getElementById("popup").classList.add("off");           	
+            	else if(document.getElementById("popup").classList.contains("off"))
+            		document.getElementById("popup").classList.toggle("off");
         });
         chrome.contentSettings.cookies.get({
-            'primaryUrl': url,
+            'primaryUrl': "https://www.google.com/*",
             'incognito': incognito
         	},
           	function(details) {
-            	if(details.setting=="allow" || details.setting=="session_only")
- 					document.getElementById("cookies").classList.add("off");           	
-            	else if(document.getElementById("cookies").classList.contains("off"))
-            		document.getElementById("cookies").classList.toggle("off");
+            	if(details.setting=="block")
+            	{
+ 					document.getElementById("cookies").classList.add("off");
+ 					document.getElementById("cookies-text").innerHTML = "Cookies Disabled";         	
+            	}
+            	else 
+            	{
+            		if(document.getElementById("cookies").classList.contains("off"))
+            			document.getElementById("cookies").classList.toggle("off");
+            		document.getElementById("cookies-text").innerHTML = "Cookies Enabled";
+            	}
         });
 
     });
 
-	document.getElementById("enabled").addEventListener("click",togglePopups);
+	document.getElementById("popup").addEventListener("click",togglePopups);
 	document.getElementById("cookies").addEventListener("click",toggleCookies);
+	document.getElementById("clrcookies").addEventListener("click",clearCookies);
 	document.getElementById("clickhide").addEventListener('click',clearCookies);
 	document.getElementById("options").addEventListener("click", function()
 	{});

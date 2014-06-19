@@ -98,12 +98,12 @@ li li
   background-image: url(popup.png);
 }
 
-#enabled .icon, #cookies .icon
+#popup .icon, #cookies .icon
 {
   background-position: -50px -1px ;
 }
 
-#enabled.off .icon, #cookies.off .icon
+#popup.off .icon, #cookies.off .icon
 {
   background-position: -50px -17px;
 }
