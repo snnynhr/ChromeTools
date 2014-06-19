@@ -1,32 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="skin/popup.css">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ChromeTools</title>
-<script src="popup.js"></script>
-<style type="text/css" >
-body
-{
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 13px;
-}
-</style>
+  <link rel="stylesheet" type="text/css" href="skin/popup.css">
+  <script src="popup.js"></script>
 </head>
-  <header>
-  	<div id="logo">	
-  	<img id = "icon" src="icons/ct128.png"> </img>
-  	<span style="color:#ee6f2a;">hrome</span><span style = "color:black;">Tools</span></div>
-  </header>
-  <body>
-	  <div id="cookies">
-	  	Clear Cookies
-	  </div>
-	  <div id = "history">
-	  	Reset History
-	  </div>
-	  <div id = "popup">
-	  	Popup Blocker <span id ="popup_status" style="color:green;">ON</span>
-	  </div>
-  </body>
+
+<body tabindex="1" style="overflow: hidden;">
+
+<header>
+  <div id="logo"></div>
+  <img id = "icon1" src="icons/ct128.png"> </img>
+    <span id = "titleText" style="color:#ee6f2a;">hrome</span><span id = "titleText2" style = "color:black;">Tools</span></div>
+</header>
+
+<div id="wrapper">
+  <ul id="menu">
+    <li id="enabled" class="menu-item" role="button">
+      <div class="icon"></div>
+      <span id="enabled-yes">Popup Blocker</span>
+      <span id="enabled-no">Popup Blocker</span>
+    </li>
+    <li id="clickhide" class="menu-item" role="button">
+      <div class="icon"></div>
+      <span></span>
+    </li>
+  </ul>
+</div>
+
+<footer id="options" role="button">
+  <div class="icon"></div>
+  <span class="options"> Options </span>
+</footer>
+
+</body>
 </html>

@@ -3,7 +3,7 @@
 
   "name": "ChromeTools",
   "description": "ChromeTools",
-  "version": "0.0.1.1",
+  "version": "0.0.1.2",
 
   "permissions": [
   "tabs",
@@ -11,7 +11,8 @@
 	"unlimitedStorage",
 	"http://*/*",
 	"https://*/*",
-  "cookies"
+  "cookies",
+  "contentSettings"
   ],
   "browser_action": {
       "default_icon": "icons/ct19.png",
