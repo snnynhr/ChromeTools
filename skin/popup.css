@@ -9,6 +9,7 @@ body
   background-image: url(background.png);
 }
 
+/* Header */
 header
 {
   height: 65px;
@@ -17,7 +18,8 @@ header
   border-bottom: 1px solid #e1ddd8;
   background-image: url(background-main.png);
 }
-#titleText
+
+#titleText1
 {
   font-size: 25px;
   font-weight: bolder;
@@ -27,7 +29,7 @@ header
   font-size: 25px;
   font-weight: bold;
 }
-#icon1
+#titleIcon
 {
   display: inline-block;
   width: 50px;
@@ -45,35 +47,12 @@ header
   top: 10px;
   height: 15px;
 }
-
+/* Menu */
 #wrapper
 {
   padding: 0px 20px;
 }
-
-footer
-{
-  cursor: pointer;
-  padding: 10px 35px;
-  border-top: 1px solid #e1ddd8;
-  background-image: url(background-main.png);
-}
-
-footer:hover
-{
-  background: -moz-linear-gradient(top, rgba(70, 50, 0, 0.1), rgba(70, 50, 0, 0.1)),
-    url(background-main.png);
-  background: -webkit-linear-gradient(top, rgba(70, 50, 0, 0.1), rgba(70, 50, 0, 0.1)),
-    url(background-main.png);
-  background: linear-gradient(to bottom, rgba(70, 50, 0, 0.1), rgba(70, 50, 0, 0.1)),
-    url(background-main.png);
-}
-
-footer .icon
-{
-  background-position: -50px -65px;
-}
-
+/* List */
 ul
 {
   margin: 0px;
@@ -119,29 +98,41 @@ li li
   background-image: url(popup.png);
 }
 
-#enabled .icon
+#enabled .icon, #cookies .icon
 {
   background-position: -50px -1px ;
 }
 
-#enabled.off .icon
+#enabled.off .icon, #cookies.off .icon
 {
   background-position: -50px -17px;
-}
-
-#enabled-no,
-#enabled.off #enabled-yes
-{
-  display: none;
-}
-
-#enabled.off #enabled-no
-{
-  display: inline;
 }
 
 #clickhide .icon,
 #clickhide-cancel .icon
 {
   background-position: -50px -33px;
+}
+/* Footer */
+footer
+{
+  cursor: pointer;
+  padding: 10px 35px;
+  border-top: 1px solid #e1ddd8;
+  background-image: url(background-main.png);
+}
+
+footer:hover
+{
+  background: -moz-linear-gradient(top, rgba(70, 50, 0, 0.1), rgba(70, 50, 0, 0.1)),
+    url(background-main.png);
+  background: -webkit-linear-gradient(top, rgba(70, 50, 0, 0.1), rgba(70, 50, 0, 0.1)),
+    url(background-main.png);
+  background: linear-gradient(to bottom, rgba(70, 50, 0, 0.1), rgba(70, 50, 0, 0.1)),
+    url(background-main.png);
+}
+
+footer .icon
+{
+  background-position: -50px -65px;
 }
