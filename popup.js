@@ -1,3 +1,7 @@
+function debug(message)
+{
+	chrome.extension.sendMessage({msg: message});
+}
 function togglePopups()
 {
 	if(document.getElementById("popup").classList.contains("off"))
@@ -7,6 +11,7 @@ function togglePopups()
 		        'setting': 'block'
 		      });
 		document.getElementById("popup").classList.toggle("off");
+		document.getElementById("popup-text").innerHTML = "Popup Blocker On";
 	}
 	else
 	{
@@ -15,6 +20,7 @@ function togglePopups()
 		        'setting': 'allow'
 		      });
 		document.getElementById("popup").classList.toggle("off");
+		document.getElementById("popup-text").innerHTML = "Popup Blocker Off";
 	}
 }
 function toggleCookies()
@@ -56,6 +62,22 @@ function clearCookies()
 	);
 	document.getElementById("clrcookies").innerHTML = '<div class="icon"></div><span> Cleared </span>';
 }
+function autoHD()
+{
+	var elem = document.getElementById("autoHD");
+	debug(elem.classList.contains("off"));
+	if(elem.classList.contains("off"))
+	{
+		localStorage.setItem("hd","on");
+		document.getElementById("autoHD-text").innerHTML = "AutoHD On";
+	}
+	else
+	{
+		localStorage.setItem("hd","off");
+		document.getElementById("autoHD-text").innerHTML = "AutoHD Off";
+	}
+	elem.classList.toggle("off");
+}
 function init()
 {
 	/* Initialize settings */
@@ -69,9 +91,16 @@ function init()
         	},
           	function(details) {
             	if(details.setting=="allow")
- 					document.getElementById("popup").classList.add("off");           	
-            	else if(document.getElementById("popup").classList.contains("off"))
-            		document.getElementById("popup").classList.toggle("off");
+            	{
+ 					document.getElementById("popup").classList.add("off");  
+ 					document.getElementById("popup-text").innerHTML = "Popup Blocker Off";         	
+            	}
+            	else
+            	{
+            		document.getElementById("popup").classList.remove("off");
+            		document.getElementById("popup-text").innerHTML = "Popup Blocker On";
+            	}
+
         });
         chrome.contentSettings.cookies.get({
             'primaryUrl': "https://www.google.com/*",
@@ -85,18 +114,33 @@ function init()
             	}
             	else 
             	{
-            		if(document.getElementById("cookies").classList.contains("off"))
-            			document.getElementById("cookies").classList.toggle("off");
+            		document.getElementById("cookies").classList.remove("off");
             		document.getElementById("cookies-text").innerHTML = "Cookies Enabled";
             	}
         });
 
     });
-
+	var hd = localStorage.getItem("hd");
+	if (hd == null)
+	{
+		hd = "on";
+		localStorage.setItem("hd",hd);
+	}
+	if(hd == "off")
+	{
+		document.getElementById("autoHD").classList.add("off");
+		document.getElementById("autoHD-text").innerHTML = "AutoHD Off";
+	}
+	else
+	{
+		document.getElementById("autoHD").classList.remove("off");
+		document.getElementById("autoHD-text").innerHTML = "AutoHD On"
+	}
 	document.getElementById("popup").addEventListener("click",togglePopups);
 	document.getElementById("cookies").addEventListener("click",toggleCookies);
 	document.getElementById("clrcookies").addEventListener("click",clearCookies);
-	document.getElementById("clickhide").addEventListener('click',clearCookies);
+	//document.getElementById("clickhide").addEventListener('click',clearCookies);
+	document.getElementById("autoHD").addEventListener("click",autoHD);
 	document.getElementById("options").addEventListener("click", function()
 	{});
 }

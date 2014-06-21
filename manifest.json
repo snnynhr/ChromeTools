@@ -3,8 +3,7 @@
 
   "name": "ChromeTools",
   "description": "ChromeTools",
-  "version": "0.0.1.4",
-
+  "version": "0.0.1.7",
   "permissions": [
   "tabs",
 	"activeTab",
@@ -12,13 +11,24 @@
 	"http://*/*",
 	"https://*/*",
   "cookies",
-  "contentSettings"
+  "contentSettings",
+  "webNavigation", 
+  "webRequest", 
+  "webRequestBlocking", 
+  "storage"
   ],
   "browser_action": {
       "default_icon": "icons/ct19.png",
       "default_popup": "popup.html",
       "default_title": "ChromeTools"
    },
+   "content_scripts" : [
+   {
+    "matches": ["*://www.youtube.com/*"],
+    "js": ["util/jquery.js","youtube.js"],
+    "run_at": "document_end"
+   }
+   ],
    "background" : {
 		"page": "background.html",
 		"persistent": true

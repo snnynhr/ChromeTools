@@ -98,18 +98,24 @@ li li
   background-image: url(popup.png);
 }
 
-#popup .icon, #cookies .icon
+#popup .icon, 
+#cookies .icon,
+#autoHD .icon
 {
   background-position: -50px -1px ;
 }
 
-#popup.off .icon, #cookies.off .icon
+#popup.off .icon, 
+#cookies.off .icon, 
+#autoHD.off .icon
 {
   background-position: -50px -17px;
 }
 
 #clickhide .icon,
-#clickhide-cancel .icon
+#clickhide-cancel .icon,
+#clrcookies .icon,
+#clrcookies.off .icon
 {
   background-position: -50px -33px;
 }

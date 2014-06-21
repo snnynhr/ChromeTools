@@ -3,5 +3,11 @@ chrome.runtime.onMessage.addListener(
     console.log(sender.tab ?
                 "from a content script:" + sender.tab.url :
                 "from the extension");
-    console.log(request.msg);
+    if(request.msg == "getSettings")
+    {
+    	var en = localStorage.getItem("hd") == "on" ? "1" : "0";
+    	sendResponse({ytQuality: "hd720", ytSize: "0", enabled: en});
+    }
+    else
+    	console.log(request.msg);
   });
