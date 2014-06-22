@@ -44,6 +44,13 @@ function toggleCookies()
 		document.getElementById("cookies-text").innerHTML = "Cookies Disabled";
 	}
 }
+function clearHistory()
+{
+	chrome.history.deleteAll(function()
+	{
+			document.getElementById("clrhistory").innerHTML = '<div class="icon"></div><span> History Cleared </span>';
+	});
+}
 function clearCookies()
 {
 	document.getElementById("clrcookies").innerHTML = '<progress id = "pbar" value="0" max="100"></progress>';
@@ -61,6 +68,19 @@ function clearCookies()
 		}
 	);
 	document.getElementById("clrcookies").innerHTML = '<div class="icon"></div><span> Cleared </span>';
+}
+function saveTab()
+{
+	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+	    var current = tabs[0];
+	    incognito = current.incognito;
+	    url = current.url;
+    
+    });
+}
+function restoreTab()
+{
+
 }
 function autoHD()
 {
@@ -139,6 +159,9 @@ function init()
 	document.getElementById("popup").addEventListener("click",togglePopups);
 	document.getElementById("cookies").addEventListener("click",toggleCookies);
 	document.getElementById("clrcookies").addEventListener("click",clearCookies);
+	document.getElementById("clrhistory").addEventListener("click",clearHistory);
+	document.getElementById("saveTab").addEventListener("click",saveTab);
+	document.getElementById("restoreTab").addEventListener("click",restoreTab);
 	//document.getElementById("clickhide").addEventListener('click',clearCookies);
 	document.getElementById("autoHD").addEventListener("click",autoHD);
 	document.getElementById("options").addEventListener("click", function()
