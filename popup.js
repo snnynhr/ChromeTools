@@ -72,15 +72,40 @@ function clearCookies()
 function saveTab()
 {
 	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-	    var current = tabs[0];
-	    incognito = current.incognito;
-	    url = current.url;
-    
+	    var c = tabs[0];
+	    var data = [
+	    c.windowId,
+	    c.index,
+	    c.url,
+	    c.active,
+	    c.pinned,
+	    c.openerTabId];
+	    debug(c.url);
+	    var curr = JSON.parse(localStorage.getItem("tabStack"));
+    	curr[curr.length] = data;
+    	localStorage.setItem("tabStack",JSON.stringify(curr));
+    	chrome.tabs.remove(c.id, function() {});
     });
 }
 function restoreTab()
 {
+	curr = JSON.parse(localStorage.getItem("tabStack"));
+	if(curr.length > 0)
+	{
+		c = curr.pop();
+		localStorage.setItem("tabStack",JSON.stringify(curr));
+		chrome.tabs.create({
+			windowId: c[0],
+			index: c[1],
+			url: c[2],
+			active: c[3],
+			pinned: c[4],
+			openerTabId: c[5],
+		}, function()
+		{
 
+		});
+	}
 }
 function autoHD()
 {
