@@ -98,6 +98,16 @@ li li
   background-image: url(popup.png);
 }
 
+.icon2
+{
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin-left: 50px;
+  vertical-align: top;
+  background-image: url(popup.png);
+}
+
 #popup .icon, 
 #cookies .icon,
 #autoHD .icon
@@ -127,14 +137,22 @@ li li
 {
   display: none;
 }
+#clrcookies.off .icon2
+{
+  background-position: -18px -33px;
+}
 
 #clrhistory .icon,
+#clrcookies .icon
+{
+  background-position: -50px -1px;
+}
 #clrhistory.off .icon,
-#clrcookies .icon,
 #clrcookies.off .icon
 {
   background-position: -34px -33px;
 }
+
 /* Footer */
 footer
 {

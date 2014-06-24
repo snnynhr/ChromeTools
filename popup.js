@@ -2,6 +2,10 @@ function debug(message)
 {
 	chrome.extension.sendMessage({msg: message});
 }
+function test()
+{
+	debug("clicked");
+}
 function togglePopups()
 {
 	if(document.getElementById("popup").classList.contains("off"))
@@ -48,25 +52,25 @@ function clearHistory()
 {
 	chrome.history.deleteAll(function()
 	{
-			document.getElementById("clrhistory").innerHTML = '<div class="icon"></div><span> History Cleared </span>';
+		localStorage.setItem("historyFlag",0);
+		document.getElementById("clrhistory").innerHTML = '<div class="icon"></div><span> History Cleared </span>';
 	});
 }
 function clearCookies()
 {
 	document.getElementById("clrcookies").innerHTML = '<progress id = "pbar" value="0" max="100"></progress>';
-	var i;
-
 	chrome.cookies.getAll({}, function(arr) {
 			var len = arr.length;
 			var i = 0;
 			arr.forEach(function(a){
 				chrome.extension.sendMessage({msg: a.domain +" " + a.name});
-			chrome.cookies.remove({url:"http"+(a.secure?"s":"")+"://"+a.domain+a.path,name:a.name,storeId:a.storeId});
-			i = i + 1;
-			//document.getElementById("pbar").value = 100*i/len;
+				chrome.cookies.remove({url:"http"+(a.secure?"s":"")+"://"+a.domain+a.path,name:a.name,storeId:a.storeId});
+				i = i + 1;
+				//document.getElementById("pbar").value = 100*i/len;
 			});
 		}
 	);
+	localStorage.setItem("cookiesFlag",0);
 	document.getElementById("clrcookies").innerHTML = '<div class="icon"></div><span> Cleared </span>';
 }
 function saveTab()
@@ -117,12 +121,12 @@ function autoHD()
 	if(elem.classList.contains("off"))
 	{
 		localStorage.setItem("hd","on");
-		document.getElementById("autoHD-text").innerHTML = "AutoHD On";
+		document.getElementById("autoHD-text").innerHTML = "YouTube AutoHD On";
 	}
 	else
 	{
 		localStorage.setItem("hd","off");
-		document.getElementById("autoHD-text").innerHTML = "AutoHD Off";
+		document.getElementById("autoHD-text").innerHTML = "YouTube AutoHD Off";
 	}
 	elem.classList.toggle("off");
 }
@@ -148,7 +152,6 @@ function init()
             		document.getElementById("popup").classList.remove("off");
             		document.getElementById("popup-text").innerHTML = "Popup Blocker On";
             	}
-
         });
         chrome.contentSettings.cookies.get({
             'primaryUrl': "https://www.google.com/*",
@@ -168,8 +171,7 @@ function init()
         });
 
     });
-
-
+	
 	var hd = localStorage.getItem("hd");
 	if (hd == null)
 	{
@@ -179,27 +181,64 @@ function init()
 	if(hd == "off")
 	{
 		document.getElementById("autoHD").classList.add("off");
-		document.getElementById("autoHD-text").innerHTML = "AutoHD Off";
+		document.getElementById("autoHD-text").innerHTML = "YouTube AutoHD Off";
 	}
 	else
 	{
 		document.getElementById("autoHD").classList.remove("off");
-		document.getElementById("autoHD-text").innerHTML = "AutoHD On"
+		document.getElementById("autoHD-text").innerHTML = "YouTube AutoHD On"
 	}
 
+	var co = localStorage.getItem("cookiesFlag");
+	if(co == null)
+	{
+		co = "1";
+		localStorage.setItem("cookiesFlag",co);
+	}
+	if(co == "1")
+	{
+		document.getElementById("clrcookies").classList.add("off");
+		document.getElementById("clrcookies-text").innerHTML = "Clear Cookies";
+	}
+	else
+	{
+		document.getElementById("clrcookies").classList.remove("off");
+		document.getElementById("clrcookies-text").innerHTML = "Cookies Cleared";
+	}
+
+	/* Init Clear history */
+	var hist = localStorage.getItem("historyFlag");
+	if(hist == null)
+	{
+		hist = "1";
+		localStorage.setItem("historyFlag",hist);
+	}
+	if(hist == "1")
+	{
+		document.getElementById("clrhistory").classList.add("off");
+		document.getElementById("clrhistory-text").innerHTML = "Clear History";
+	}
+	else
+	{
+		document.getElementById("clrhistory").classList.remove("off");
+		document.getElementById("clrhistory-text").innerHTML = "History Cleared";
+	}
+
+	/* Init restore tab */
 	var tabStack = JSON.parse(localStorage.getItem("tabStack"));
 	if(tabStack.length == 0)
 		document.getElementById("restoreTab").classList.add("hide");
 	else
 		document.getElementById("restoreTab").classList.remove("hide");
 
+	/* Click Event Listeners */
 	document.getElementById("popup").addEventListener("click",togglePopups);
 	document.getElementById("cookies").addEventListener("click",toggleCookies);
-	document.getElementById("clrcookies").addEventListener("click",clearCookies);
+	document.getElementById("clrcookies").addEventListener("click",test);
+	document.getElementById("hi").addEventListener("click", function(e) { e.stopPropagation(); debug("icon clicked");});
 	document.getElementById("clrhistory").addEventListener("click",clearHistory);
 	document.getElementById("saveTab").addEventListener("click",saveTab);
 	document.getElementById("restoreTab").addEventListener("click",restoreTab);
-	//document.getElementById("clickhide").addEventListener('click',clearCookies);
 	document.getElementById("autoHD").addEventListener("click",autoHD);
 	document.getElementById("options").addEventListener("click", function()
 	{});
