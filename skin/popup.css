@@ -112,12 +112,28 @@ li li
   background-position: -50px -17px;
 }
 
-#clickhide .icon,
-#clickhide-cancel .icon,
+
+#saveTab .icon
+{
+  background-position: -18px -1px;
+}
+
+#restoreTab .icon
+{
+  background-position: -18px -17px;
+}
+
+#restoreTab.hide
+{
+  display: none;
+}
+
+#clrhistory .icon,
+#clrhistory.off .icon,
 #clrcookies .icon,
 #clrcookies.off .icon
 {
-  background-position: -50px -33px;
+  background-position: -34px -33px;
 }
 /* Footer */
 footer

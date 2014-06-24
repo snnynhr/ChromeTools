@@ -85,6 +85,7 @@ function saveTab()
     	curr[curr.length] = data;
     	localStorage.setItem("tabStack",JSON.stringify(curr));
     	chrome.tabs.remove(c.id, function() {});
+		document.getElementById("restoreTab").classList.remove("hide");
     });
 }
 function restoreTab()
@@ -93,6 +94,8 @@ function restoreTab()
 	if(curr.length > 0)
 	{
 		c = curr.pop();
+		if(curr.length ==0)
+			document.getElementById("restoreTab").classList.add("hide");
 		localStorage.setItem("tabStack",JSON.stringify(curr));
 		chrome.tabs.create({
 			windowId: c[0],
@@ -165,6 +168,8 @@ function init()
         });
 
     });
+
+
 	var hd = localStorage.getItem("hd");
 	if (hd == null)
 	{
@@ -181,6 +186,13 @@ function init()
 		document.getElementById("autoHD").classList.remove("off");
 		document.getElementById("autoHD-text").innerHTML = "AutoHD On"
 	}
+
+	var tabStack = JSON.parse(localStorage.getItem("tabStack"));
+	if(tabStack.length == 0)
+		document.getElementById("restoreTab").classList.add("hide");
+	else
+		document.getElementById("restoreTab").classList.remove("hide");
+
 	document.getElementById("popup").addEventListener("click",togglePopups);
 	document.getElementById("cookies").addEventListener("click",toggleCookies);
 	document.getElementById("clrcookies").addEventListener("click",clearCookies);
