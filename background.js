@@ -34,6 +34,51 @@ if(ytQuality == null)
 {
     localStorage.setItem("ytQuality","highres");
 }
+
+chrome.tabs.query({}, function(tabs)
+{
+    var session = [];
+    for(var i=0; i<tabs.length; i++)
+    {
+        var c = tabs[i];
+        var data = [
+            c.id,
+            c.windowId,
+            c.index,
+            c.url,
+            c.active,
+            c.pinned];
+        session[session.length] = data;
+    }
+    localStorage.setItem("chromeSession",JSON.stringify(session));
+});
+
+chrome.tabs.onCreated.addListener(function(tab){
+    curr = JSON.parse(localStorage.getItem("chromeSession"));
+    var data = [
+        tab.id,
+        tab.windowId,
+        tab.index,
+        tab.url,
+        tab.active,
+        tab.pinned];
+    curr[curr.length] = data;
+    localStorage.setItem("chromeSession",JSON.stringify(curr));
+});
+
+chrome.tabs.onRemoved.addListener(function(tabId,removeInfo){
+    curr = JSON.parse(localStorage.getItem("chromeSession"));
+    for(var i=0; i<curr.length; i++)
+        if(curr[i][0]==tabId)
+        {
+            curr.splice(i,1);
+            break;
+        }
+    localStorage.setItem("chromeSession",JSON.stringify(curr));
+});
+
+
+
 /* Cookies listener */
 chrome.cookies.onChanged.addListener(function (changeInfo)
 {

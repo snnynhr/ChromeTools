@@ -3,7 +3,7 @@
 
   "name": "ChromeTools",
   "description": "ChromeTools",
-  "version": "0.0.2.3",
+  "version": "0.0.2.5",
   "permissions": [
   "tabs",
 	"activeTab",
