@@ -101,7 +101,6 @@ function restoreTab()
 		c = curr.pop();
 		if(curr.length ==0)
 			document.getElementById("restoreTab").classList.add("hide");
-		localStorage.setItem("tabStack",JSON.stringify(curr));
 		chrome.windows.get(c[0],{},function(windows)
 		{
 			if(windows == undefined || windows.id == chrome.windows.WINDOW_ID_NONE)
@@ -110,8 +109,12 @@ function restoreTab()
 					{
 						for(var i=0; i<curr.length; i++)
 						{
-							
+							if(curr[i][0] == c[0])
+							{
+								curr[i][0] = win.id;
+							}
 						}
+						localStorage.setItem("tabStack",JSON.stringify(curr));
 					});
 			}
 			else
@@ -122,8 +125,8 @@ function restoreTab()
 					url: c[2],
 					active: c[3],
 					pinned: c[4],
-					openerTabId: c[5],
 				},  function(){});
+				localStorage.setItem("tabStack",JSON.stringify(curr));
 			}
 		});
 	}
