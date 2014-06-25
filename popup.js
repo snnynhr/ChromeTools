@@ -75,7 +75,6 @@ function clearCookies()
 }
 function saveTab()
 {
-	debug("dsfadsf");
 	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 	    var c = tabs[0];
 	    var data = [
@@ -83,9 +82,7 @@ function saveTab()
 	    c.index,
 	    c.url,
 	    c.active,
-	    c.pinned,
-	    c.openerTabId];
-	    debug(c.url);
+	    c.pinned];
 	    var curr = JSON.parse(localStorage.getItem("tabStack"));
     	curr[curr.length] = data;
     	localStorage.setItem("tabStack",JSON.stringify(curr));
@@ -108,12 +105,8 @@ function restoreTab()
 				chrome.windows.create({url: c[2]}, function(win)
 					{
 						for(var i=0; i<curr.length; i++)
-						{
 							if(curr[i][0] == c[0])
-							{
 								curr[i][0] = win.id;
-							}
-						}
 						localStorage.setItem("tabStack",JSON.stringify(curr));
 					});
 			}
@@ -128,6 +121,59 @@ function restoreTab()
 				},  function(){});
 				localStorage.setItem("tabStack",JSON.stringify(curr));
 			}
+		});
+	}
+}
+function saveSession()
+{
+	chrome.tabs.query({currentWindow: true}, function(tabs)
+	{
+		var curr = JSON.parse(localStorage.getItem("sessionStack"));
+		var session = [];
+		for(var i=0; i<tabs.length; i++)
+		{
+			var c = tabs[i];
+		    var data = [
+			    c.windowId,
+			    c.index,
+			    c.url,
+			    c.active,
+			    c.pinned];
+	    	session[session.length] = data;
+	    	chrome.tabs.remove(c.id, function() {});
+		}
+		curr[curr.length] = session;
+		localStorage.setItem("sessionStack",JSON.stringify(curr));
+	    document.getElementById("restoreSession").classList.remove("hide");
+	});
+}
+function restoreSession()
+{
+	curr = JSON.parse(localStorage.getItem("sessionStack"));
+	if(curr.length > 0)
+	{
+		c = curr.pop();
+		if(curr.length == 0)
+			document.getElementById("restoreSession").classList.add("hide");
+		localStorage.setItem("sessionStack",JSON.stringify(curr));
+		chrome.windows.create({}, function(win)
+		{
+			chrome.tabs.query({windowId: win.id}, function(tabs)
+				{
+					var t = tabs[0];
+					for(var i=0; i<c.length; i++)
+					{
+						chrome.tabs.create({
+							windowId: win.id,
+							index: c[i][1],
+							url: c[i][2],
+							active: c[i][3],
+							pinned: c[i][4],
+						},  function(){});
+						chrome.tabs.remove(t.id);
+					}
+				});
+			
 		});
 	}
 }
@@ -292,6 +338,13 @@ function init()
 	else
 		document.getElementById("restoreTab").classList.remove("hide");
 
+	/* Init restore session */
+	var sessionStack = JSON.parse(localStorage.getItem("sessionStack"));
+	if(sessionStack.length == 0)
+		document.getElementById("restoreSession").classList.add("hide");
+	else
+		document.getElementById("restoreSession").classList.remove("hide");
+
 	/* Click Event Listeners */
 	document.getElementById("popup").addEventListener("click",togglePopups);
 	document.getElementById("cookies").addEventListener("click",toggleCookies);
@@ -301,6 +354,8 @@ function init()
 	document.getElementById("clrhistory-add").addEventListener("click", function(e) { e.stopPropagation(); debug("icon clicked");});
 	document.getElementById("saveTab").addEventListener("click",saveTab);
 	document.getElementById("restoreTab").addEventListener("click",restoreTab);
+	document.getElementById("saveSession").addEventListener("click",saveSession);
+	document.getElementById("restoreSession").addEventListener("click",restoreSession);
 	document.getElementById("autoHD").addEventListener("click",autoHD);
 	document.getElementById("autoHD-setting").addEventListener("click",changeAutoHD);
 	document.getElementById("options").addEventListener("click", options);

@@ -4,6 +4,11 @@ if(s == null)
 {
     localStorage.setItem("tabStack",JSON.stringify([]));
 }
+var ss = localStorage.getItem("sessionStack");
+if(ss == null)
+{
+    localStorage.setItem("sessionStack",JSON.stringify([]));
+}
 var c = localStorage.getItem("cookiesFlag");
 if(c == null)
 {
