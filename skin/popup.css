@@ -101,9 +101,10 @@ li li
 .icon2
 {
   display: inline-block;
+  position: absolute;
+  right: 30px;
   width: 15px;
   height: 15px;
-  margin-left: 50px;
   vertical-align: top;
   background-image: url(popup.png);
 }
@@ -123,21 +124,28 @@ li li
 }
 
 
-#saveTab .icon
+#saveTab .icon,
+#saveSession .icon
 {
   background-position: -18px -1px;
 }
 
-#restoreTab .icon
+#restoreTab .icon,
+#restoreSession .icon
 {
   background-position: -18px -17px;
 }
 
-#restoreTab.hide
+#restoreTab.hide,
+#restoreSession.hide
 {
   display: none;
 }
-#clrcookies.off .icon2
+
+#clrcookies.off .icon2,
+#clrcookies .icon2,
+#clrhistory.off .icon2,
+#clrhistory .icon2
 {
   background-position: -18px -33px;
 }
@@ -151,6 +159,13 @@ li li
 #clrcookies.off .icon
 {
   background-position: -34px -33px;
+}
+
+#autoHD-setting
+{
+  position: absolute;
+  right: 20px;
+  font-weight: bold;
 }
 
 /* Footer */

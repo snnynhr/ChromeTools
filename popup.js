@@ -75,6 +75,7 @@ function clearCookies()
 }
 function saveTab()
 {
+	debug("dsfadsf");
 	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
 	    var c = tabs[0];
 	    var data = [
@@ -101,34 +102,75 @@ function restoreTab()
 		if(curr.length ==0)
 			document.getElementById("restoreTab").classList.add("hide");
 		localStorage.setItem("tabStack",JSON.stringify(curr));
-		chrome.tabs.create({
-			windowId: c[0],
-			index: c[1],
-			url: c[2],
-			active: c[3],
-			pinned: c[4],
-			openerTabId: c[5],
-		}, function()
+		chrome.windows.get(c[0],{},function(windows)
 		{
-
+			if(windows == undefined || windows.id == chrome.windows.WINDOW_ID_NONE)
+			{
+				chrome.windows.create({url: c[2]}, function(win)
+					{
+						for(var i=0; i<curr.length; i++)
+						{
+							
+						}
+					});
+			}
+			else
+			{
+				chrome.tabs.create({
+					windowId: c[0],
+					index: c[1],
+					url: c[2],
+					active: c[3],
+					pinned: c[4],
+					openerTabId: c[5],
+				},  function(){});
+			}
 		});
 	}
 }
 function autoHD()
 {
 	var elem = document.getElementById("autoHD");
-	debug(elem.classList.contains("off"));
 	if(elem.classList.contains("off"))
 	{
 		localStorage.setItem("hd","on");
-		document.getElementById("autoHD-text").innerHTML = "YouTube AutoHD On";
+		document.getElementById("autoHD-text").innerHTML = "AutoHD On";
 	}
 	else
 	{
 		localStorage.setItem("hd","off");
-		document.getElementById("autoHD-text").innerHTML = "YouTube AutoHD Off";
+		document.getElementById("autoHD-text").innerHTML = "AutoHD Off";
 	}
 	elem.classList.toggle("off");
+}
+function changeAutoHD(e)
+{
+	e.stopPropagation();
+	var elem = document.getElementById("autoHD-setting");
+	if(elem.innerHTML == "Default")
+	{
+		elem.innerHTML = "720p";
+		localStorage.setItem("ytQuality","hd720");
+	}
+	else if(elem.innerHTML == "720p")
+	{
+		elem.innerHTML = "1080p";
+		localStorage.setItem("ytQuality","hd1080");
+	}
+	else if(elem.innerHTML == "1080p")
+	{
+		elem.innerHTML = "Maximum";
+		localStorage.setItem("ytQuality","highres");
+	}
+	else if(elem.innerHTML == "Maximum")
+	{
+		elem.innerHTML = "Default";
+		localStorage.setItem("ytQuality","default");
+	}
+}
+function options()
+{	
+	chrome.tabs.create({url: "options.html"}, function() {});
 }
 function init()
 {
@@ -181,13 +223,29 @@ function init()
 	if(hd == "off")
 	{
 		document.getElementById("autoHD").classList.add("off");
-		document.getElementById("autoHD-text").innerHTML = "YouTube AutoHD Off";
+		document.getElementById("autoHD-text").innerHTML = "AutoHD Off";
 	}
 	else
 	{
 		document.getElementById("autoHD").classList.remove("off");
-		document.getElementById("autoHD-text").innerHTML = "YouTube AutoHD On"
+		document.getElementById("autoHD-text").innerHTML = "AutoHD On";
 	}
+
+	var ytQuality = localStorage.getItem("ytQuality");
+	if (ytQuality == null)
+	{
+		ytQuality = "highres";
+		localStorage.setItem("ytQuality","highres");
+	}
+	var elem = document.getElementById("autoHD-setting");
+	if(ytQuality == "default")
+		elem.innerHTML = "Default";
+	else if(ytQuality == "hd720")
+		elem.innerHTML = "720p";
+	else if(ytQuality == "hd1080")
+		elem.innerHTML = "1080p";
+	else if(ytQuality == "highres")
+		elem.innerHTML = "Maximum";
 
 	var co = localStorage.getItem("cookiesFlag");
 	if(co == null)
@@ -235,12 +293,13 @@ function init()
 	document.getElementById("popup").addEventListener("click",togglePopups);
 	document.getElementById("cookies").addEventListener("click",toggleCookies);
 	document.getElementById("clrcookies").addEventListener("click",test);
-	document.getElementById("hi").addEventListener("click", function(e) { e.stopPropagation(); debug("icon clicked");});
+	document.getElementById("clrcookies-add").addEventListener("click", function(e) { e.stopPropagation(); debug("icon clicked");});
 	document.getElementById("clrhistory").addEventListener("click",clearHistory);
+	document.getElementById("clrhistory-add").addEventListener("click", function(e) { e.stopPropagation(); debug("icon clicked");});
 	document.getElementById("saveTab").addEventListener("click",saveTab);
 	document.getElementById("restoreTab").addEventListener("click",restoreTab);
 	document.getElementById("autoHD").addEventListener("click",autoHD);
-	document.getElementById("options").addEventListener("click", function()
-	{});
+	document.getElementById("autoHD-setting").addEventListener("click",changeAutoHD);
+	document.getElementById("options").addEventListener("click", options);
 }
 window.addEventListener("DOMContentLoaded", init, false);

@@ -14,7 +14,21 @@ if(h == null)
 {
     localStorage.setItem("historyFlag",1);
 }
-
+var hd = localStorage.getItem("hd");
+if(hd == null)
+{
+    localStorage.setItem("hd","on");
+}
+var ytSize = localStorage.getItem("ytSize");
+if(ytSize == null)
+{
+    localStorage.setItem("ytSize","1");
+}
+var ytQuality = localStorage.getItem("ytQuality");
+if(ytQuality == null)
+{
+    localStorage.setItem("ytQuality","highres");
+}
 /* Cookies listener */
 chrome.cookies.onChanged.addListener(function (changeInfo)
 {
@@ -35,7 +49,9 @@ chrome.runtime.onMessage.addListener(
     if(request.msg == "getSettings")
     {
     	var en = localStorage.getItem("hd") == "on" ? "1" : "0";
-    	sendResponse({ytQuality: "hd720", ytSize: "0", enabled: en});
+        var ytSize = localStorage.getItem("ytSize");
+        var ytQuality = localStorage.getItem("ytQuality"); 
+    	sendResponse({ytQuality: ytQuality, ytSize: ytSize, enabled: en});
     }
     else
     	console.log(request.msg);
