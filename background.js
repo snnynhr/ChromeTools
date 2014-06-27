@@ -63,6 +63,7 @@ chrome.tabs.onCreated.addListener(function(tab){
         tab.active,
         tab.pinned];
     curr[curr.length] = data;
+    console.log(curr);
     localStorage.setItem("chromeSession",JSON.stringify(curr));
 });
 
@@ -74,6 +75,7 @@ chrome.tabs.onRemoved.addListener(function(tabId,removeInfo){
             curr.splice(i,1);
             break;
         }
+    console.log(curr);
     localStorage.setItem("chromeSession",JSON.stringify(curr));
 });
 
