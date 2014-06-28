@@ -177,6 +177,10 @@ function restoreSession()
 		});
 	}
 }
+function restoreCrash()
+{
+	
+}
 function autoHD()
 {
 	var elem = document.getElementById("autoHD");
@@ -356,6 +360,7 @@ function init()
 	document.getElementById("restoreTab").addEventListener("click",restoreTab);
 	document.getElementById("saveSession").addEventListener("click",saveSession);
 	document.getElementById("restoreSession").addEventListener("click",restoreSession);
+	document.getElementById("restoreCrash").addEventListener("click",restoreCrash);
 	document.getElementById("autoHD").addEventListener("click",autoHD);
 	document.getElementById("autoHD-setting").addEventListener("click",changeAutoHD);
 	document.getElementById("options").addEventListener("click", options);

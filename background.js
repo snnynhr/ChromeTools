@@ -79,7 +79,21 @@ chrome.tabs.onRemoved.addListener(function(tabId,removeInfo){
     localStorage.setItem("chromeSession",JSON.stringify(curr));
 });
 
-
+chrome.tabs.onUpdated.addListener(function(tabId,info,tab)
+{
+    if(info.url != undefined)
+    {
+        console.log(tabId + " " + info.url);
+        curr = JSON.parse(localStorage.getItem("chromeSession"));
+        for(var i=0; i<curr.length; i++)
+            if(curr[i][0]==tabId)
+            {
+                curr[i][3]=info.url;
+                break;
+            }
+        localStorage.setItem("chromeSession",JSON.stringify(curr));
+    }  
+});
 
 /* Cookies listener */
 chrome.cookies.onChanged.addListener(function (changeInfo)
