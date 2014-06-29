@@ -179,7 +179,7 @@ function restoreSession()
 }
 function restoreCrash()
 {
-	
+
 }
 function autoHD()
 {
@@ -220,6 +220,14 @@ function changeAutoHD(e)
 		elem.innerHTML = "Default";
 		localStorage.setItem("ytQuality","default");
 	}
+}
+function addCookie(e)
+{
+
+}
+function addHistory(e)
+{
+
 }
 function options()
 {	
@@ -352,10 +360,10 @@ function init()
 	/* Click Event Listeners */
 	document.getElementById("popup").addEventListener("click",togglePopups);
 	document.getElementById("cookies").addEventListener("click",toggleCookies);
-	document.getElementById("clrcookies").addEventListener("click",test);
-	document.getElementById("clrcookies-add").addEventListener("click", function(e) { e.stopPropagation(); debug("icon clicked");});
+	document.getElementById("clrcookies").addEventListener("click",clearCookies);
+	document.getElementById("clrcookies-add").addEventListener("click", addCookie);
 	document.getElementById("clrhistory").addEventListener("click",clearHistory);
-	document.getElementById("clrhistory-add").addEventListener("click", function(e) { e.stopPropagation(); debug("icon clicked");});
+	document.getElementById("clrhistory-add").addEventListener("click", addHistory);
 	document.getElementById("saveTab").addEventListener("click",saveTab);
 	document.getElementById("restoreTab").addEventListener("click",restoreTab);
 	document.getElementById("saveSession").addEventListener("click",saveSession);
