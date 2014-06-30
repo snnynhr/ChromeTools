@@ -50,12 +50,27 @@ function toggleCookies()
 }
 function clearHistory()
 {
+	var curr = JSON.parse(localStorage.getItem("historyWL"));
 	chrome.history.search({text: ""}, function(arr)
 	{
 		for(var i = 0; i<arr.length; i++)
 		{
-			debug(arr[i].url);
-			//chrome.history.deleteUrl(arr[i].url);
+			var url = arr[i].url;
+			var n = url.search("://");
+			if(n >= 0)
+				url = url.substring(n+3);
+			var m = url.search("/");
+			url = url.substring(0,m);
+			
+			var flag = true;
+			for(var j=0; j<curr.length; j++)
+				if(curr[j]==url)
+				{
+					flag = false;
+					break;
+				}
+			if(flag)
+				chrome.history.deleteURL(arr[i].url);
 		}
 	});
 	/*
@@ -67,16 +82,17 @@ function clearHistory()
 }
 function clearCookies()
 {
-	document.getElementById("clrcookies").innerHTML = '<progress id = "pbar" value="0" max="100"></progress>';
+	var curr = JSON.parse(localStorage.getItem("cookiesWL"));
 	chrome.cookies.getAll({}, function(arr) {
-			var len = arr.length;
-			var i = 0;
-			arr.forEach(function(a){
-				chrome.extension.sendMessage({msg: a.domain +" " + a.name});
-				chrome.cookies.remove({url:"http"+(a.secure?"s":"")+"://"+a.domain+a.path,name:a.name,storeId:a.storeId});
-				i = i + 1;
-				//document.getElementById("pbar").value = 100*i/len;
-			});
+			for(var i = 0; i<arr.length; i++)
+			{
+				var flag = true;
+				for(var j=0; j<curr.length; j++)
+					if(curr[j]==arr[i].domain)
+						flag = false;
+				if(flag)
+					chrome.cookies.remove({url:"http"+(a.secure?"s":"")+"://"+a.domain+a.path,name:a.name,storeId:a.storeId});
+			}
 		}
 	);
 	localStorage.setItem("cookiesFlag",0);
@@ -235,19 +251,12 @@ function addCookie(e)
 	var curr = JSON.parse(localStorage.getItem("cookiesWL"));
 	e.stopPropagation();
 	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-	    var current = tabs[0];
-	    var n = current.url.find("://");
-	    var url;
-	    if(n >= 0)
-	    {
-	    	var m = current.url.substring(n+3).find("/");
-	    	url = current.url.substring(0,m);
-	    }
-	    else
-	    {
-	    	var m = current.url.find("/");
-	    	url = current.url.substring(0,m);
-	    }
+	    var url = tabs[0].url;
+	    var n = url.search("://");
+		if(n >= 0)
+			url = url.substring(n+3);
+		var m = url.search("/");
+		url = url.substring(0,m);
 	    var flag = false;
 	    for(var i=0; i<curr.length; i++)
 	    	if(curr[i]==url)
@@ -266,19 +275,12 @@ function addHistory(e)
 	var curr = JSON.parse(localStorage.getItem("historyWL"));
 	e.stopPropagation();
 	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-	    var current = tabs[0];
-	    var n = current.url.find("://");
-	    var url;
-	    if(n >= 0)
-	    {
-	    	var m = current.url.substring(n+3).find("/");
-	    	url = current.url.substring(0,m);
-	    }
-	    else
-	    {
-	    	var m = current.url.find("/");
-	    	url = current.url.substring(0,m);
-	    }
+	    var url = tabs[0].url;
+	    var n = url.search("://");
+		if(n >= 0)
+			url = url.substring(n+3);
+		var m = url.search("/");
+		url = url.substring(0,m);
 	    var flag = false;
 	    for(var i=0; i<curr.length; i++)
 	    	if(curr[i]==url)
