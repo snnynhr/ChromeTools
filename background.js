@@ -1,4 +1,14 @@
 /* Init localStorage */
+var cwl = localStorage.getItem("cookiesWL");
+if(cwl == null)
+{
+    localStorage.setItem("cookiesWL",JSON.stringify([]));
+}
+var hwl = localStorage.getItem("historyWL");
+if(hwl == null)
+{
+    localStorage.setItem("historyWL",JSON.stringify([]));
+}
 var s = localStorage.getItem("tabStack");
 if(s == null)
 {

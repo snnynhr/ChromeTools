@@ -50,11 +50,20 @@ function toggleCookies()
 }
 function clearHistory()
 {
+	chrome.history.search({text: ""}, function(arr)
+	{
+		for(var i = 0; i<arr.length; i++)
+		{
+			debug(arr[i].url);
+			//chrome.history.deleteUrl(arr[i].url);
+		}
+	});
+	/*
 	chrome.history.deleteAll(function()
 	{
 		localStorage.setItem("historyFlag",0);
 		document.getElementById("clrhistory").innerHTML = '<div class="icon"></div><span> History Cleared </span>';
-	});
+	});*/
 }
 function clearCookies()
 {
@@ -223,11 +232,65 @@ function changeAutoHD(e)
 }
 function addCookie(e)
 {
-
+	var curr = JSON.parse(localStorage.getItem("cookiesWL"));
+	e.stopPropagation();
+	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+	    var current = tabs[0];
+	    var n = current.url.find("://");
+	    var url;
+	    if(n >= 0)
+	    {
+	    	var m = current.url.substring(n+3).find("/");
+	    	url = current.url.substring(0,m);
+	    }
+	    else
+	    {
+	    	var m = current.url.find("/");
+	    	url = current.url.substring(0,m);
+	    }
+	    var flag = false;
+	    for(var i=0; i<curr.length; i++)
+	    	if(curr[i]==url)
+	    	{
+	    		flag = true;
+	    	}
+	    if(!flag)
+	    {
+	    	curr[curr.length] = url;
+		    localStorage.setItem("cookiesWL",JSON.stringify(curr));
+		}
+    });
 }
 function addHistory(e)
 {
-
+	var curr = JSON.parse(localStorage.getItem("historyWL"));
+	e.stopPropagation();
+	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+	    var current = tabs[0];
+	    var n = current.url.find("://");
+	    var url;
+	    if(n >= 0)
+	    {
+	    	var m = current.url.substring(n+3).find("/");
+	    	url = current.url.substring(0,m);
+	    }
+	    else
+	    {
+	    	var m = current.url.find("/");
+	    	url = current.url.substring(0,m);
+	    }
+	    var flag = false;
+	    for(var i=0; i<curr.length; i++)
+	    	if(curr[i]==url)
+	    	{
+	    		flag = true;
+	    	}
+	    if(!flag)
+	    {
+	    	curr[curr.length] = url;
+		    localStorage.setItem("historyWL",JSON.stringify(curr));
+		}
+    });
 }
 function options()
 {	
