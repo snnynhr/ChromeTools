@@ -1,29 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="skin/options.css">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ChromeTools Options</title>
-<style>
-</style>
+	<link rel="stylesheet" type="text/css" href="skin/options.css">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script src="options.js"></script>
+	<title>ChromeTools Options</title>
 </head>
+<body>
 	<header>
 		<div>
 		<img id = "logo" src="icons/ct128.png" alt="some_text" align="middle">
 			<b id = "text">Options</b>
 		</div>
 	</header>
-	<body>
-	<div>
-		Data Storage Size (#):
+
+	<div> 
+		<span id = "title">YouTube Options:</span>
+		<br><br>
+		<div id = "wrapper">
+			<div>
+				<span id = "subtitle"> Auto Quality: </span>
+			</div>
+			<input type="radio" name="quality" value="def">Default <br>
+			<input type="radio" name="quality" value="hd720">720p <br>
+			<input type="radio" name="quality" value="hd1080">1080p <br>
+			<input type="radio" name="quality" value="max">Maximum <br><br>
+			<div>
+				<span id = "subtitle">Player Size: </span>
+			</div>
+			<input type="radio" name="size" value="def">Normal <br>
+			<input type="radio" name="size" value="hd720">Large <br>
+			<br>
+		</div>
+
+		<span id = "title">History Whitelist:</span>
+		<br><br>
+		<div id = "wrapper">
+			<input type="text">
+			<button id ="addhist">Add</button>
+			<select id ="history" multiple size="10"></select>
+			<br><br>
+			<button id="del">Delete</button>
+		</div>
+
+		<span id = "title">Cookies Whitelist:</span>
+		<br><br>
+		<div id = "wrapper">
+			<input type="text">
+			<button id ="addhist">Add</button>
+			<select id ="history" multiple size="10"></select>
+			<br><br>
+			<button id="del">Delete</button>
+		</div>
 	</div>
-	<input type="number" id="dss" >
-	<div>
-		Minimum Entries till write:
-	</div>
-	<input type="number" id="min" >
-	<div id="status"></div>
-	<button id="save">Save</button>
-	<script src="options.js"></script>
-	</body>
+</body>
 </html>

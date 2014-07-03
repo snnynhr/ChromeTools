@@ -16,7 +16,7 @@ body
   color: #545454;
   background-color: #f8f6f2;
   padding: 20px;
-  text-align: center;
+  text-align: left;
 }
 #text
 {
@@ -35,4 +35,22 @@ body
   height: 150px;
   width: 150px;
   margin: 0px auto;
+}
+#title
+{
+  text-align: left;
+  font-size: 20px;
+  font-weight: bolder;
+}
+#subtitle
+{
+  font-size: 15px;
+}
+#wrapper
+{
+  padding-left: 20px;
+}
+#history
+{
+  width: 700px;
 }

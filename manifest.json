@@ -3,7 +3,7 @@
 
   "name": "ChromeTools",
   "description": "ChromeTools",
-  "version": "0.0.2.5",
+  "version": "0.0.2.7",
   "permissions": [
   "tabs",
 	"activeTab",
@@ -39,6 +39,7 @@
 		"page": "background.html",
 		"persistent": true
    },
+   "options_page": "options.html",
    "icons": {
       "128": "icons/ct128.png",
       "16": "icons/ct16.png",
