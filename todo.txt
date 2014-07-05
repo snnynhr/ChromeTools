@@ -1,5 +1,1 @@
-1. Clear cookies/History whitelist
-2. Save session/restore session
-3. Crash restore
-4. AutoHD options
-5. Options Page
+1. Crash restore
