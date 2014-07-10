@@ -48,6 +48,82 @@ function toggleCookies()
 		document.getElementById("cookies-text").innerHTML = "Cookies Disabled";
 	}
 }
+function toggleDNT()
+{
+	if(document.getElementById("dnt").classList.contains("off"))
+	{
+		chrome.privacy.websites.referrersEnabled.get({}, function(details) {
+			chrome.privacy.websites.referrersEnabled.set({ value: true }, function() {
+			if (chrome.runtime.lastError === undefined)
+				document.getElementById("dnt").classList.remove("off");
+			else
+				document.getElementById("dnt-text").innerHTML = "Error";
+			});
+		});
+	}
+	else
+	{
+		chrome.privacy.websites.referrersEnabled.get({}, function(details) {
+			chrome.privacy.websites.referrersEnabled.set({ value: false }, function() {
+			if (chrome.runtime.lastError === undefined)
+				document.getElementById("dnt").classList.add("off");
+			else
+				document.getElementById("dnt-text").innerHTML = "Error";
+			});
+		});
+	}
+}
+function togglePrefetch()
+{
+	if(document.getElementById("prefetch").classList.contains("off"))
+	{
+		chrome.privacy.network.networkPredictionEnabled.get({}, function(details) {
+			chrome.privacy.network.networkPredictionEnabled.set({ value: true }, function() {
+			if (chrome.runtime.lastError === undefined)
+				document.getElementById("prefetch").classList.remove("off");
+			else
+				document.getElementById("prefetch-text").innerHTML = "Error";
+			});
+		});
+	}
+	else
+	{
+		chrome.privacy.network.networkPredictionEnabled.get({}, function(details) {
+			chrome.privacy.network.networkPredictionEnabled.set({ value: false }, function() {
+			if (chrome.runtime.lastError === undefined)
+				document.getElementById("prefetch").classList.add("off");
+			else
+				document.getElementById("prefetch-text").innerHTML = "Error";
+			});
+		});
+	}
+}
+function toggleAutofill()
+{
+	
+	if(document.getElementById("autofill").classList.contains("off"))
+	{
+		chrome.privacy.services.autofillEnabled.get({}, function(details) {
+			chrome.privacy.services.autofillEnabled.set({ value: true }, function() {
+			if (chrome.runtime.lastError === undefined)
+				document.getElementById("autofill").classList.remove("off");
+			else
+				document.getElementById("autofill-text").innerHTML = "Error";
+			});
+		});
+	}
+	else
+	{
+		chrome.privacy.services.autofillEnabled.get({}, function(details) {
+			chrome.privacy.services.autofillEnabled.set({ value: false }, function() {
+			if (chrome.runtime.lastError === undefined)
+				document.getElementById("autofill").classList.add("off");
+			else
+				document.getElementById("autofill-text").innerHTML = "Error";
+			});
+		});	
+	}
+}
 function clearHistory()
 {
 	var curr = JSON.parse(localStorage.getItem("historyWL"));
@@ -407,7 +483,30 @@ function init()
 		document.getElementById("clrhistory").classList.remove("off");
 		document.getElementById("clrhistory-text").innerHTML = "History Cleared";
 	}
-
+	
+	chrome.privacy.websites.referrersEnabled.get({}, function(details) {
+		if (details.value)
+			document.getElementById("dnt").classList.remove("off");
+		else
+			document.getElementById("dnt").classList.add("off");
+	});
+	
+	
+	chrome.privacy.network.networkPredictionEnabled.get({}, function(details) {
+		if (details.value)
+			document.getElementById("prefetch").classList.remove("off");
+		else
+			document.getElementById("prefetch").classList.add("off");
+	});
+	
+	
+	chrome.privacy.services.autofillEnabled.get({}, function(details) {
+		if (details.value)
+			document.getElementById("autofill").classList.remove("off");
+		else
+			document.getElementById("autofill").classList.add("off");
+	});
+	
 	/* Init restore tab */
 	var tabStack = JSON.parse(localStorage.getItem("tabStack"));
 	if(tabStack.length == 0)
@@ -425,6 +524,9 @@ function init()
 	/* Click Event Listeners */
 	document.getElementById("popup").addEventListener("click",togglePopups);
 	document.getElementById("cookies").addEventListener("click",toggleCookies);
+	document.getElementById("dnt").addEventListener("click",toggleDNT);
+	document.getElementById("prefetch").addEventListener("click",togglePrefetch);
+	document.getElementById("autofill").addEventListener("click",toggleAutofill);
 	document.getElementById("clrcookies").addEventListener("click",clearCookies);
 	document.getElementById("clrcookies-add").addEventListener("click", addCookie);
 	document.getElementById("clrhistory").addEventListener("click",clearHistory);

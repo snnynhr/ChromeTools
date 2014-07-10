@@ -111,14 +111,20 @@ li li
 
 #popup .icon, 
 #cookies .icon,
-#autoHD .icon
+#autoHD .icon,
+#dnt .icon,
+#prefetch .icon,
+#autofill .icon
 {
   background-position: -50px -1px ;
 }
 
 #popup.off .icon, 
 #cookies.off .icon, 
-#autoHD.off .icon
+#autoHD.off .icon,
+#dnt.off .icon,
+#prefetch.off .icon,
+#autofill.off .icon
 {
   background-position: -50px -17px;
 }
@@ -131,7 +137,8 @@ li li
 }
 
 #restoreTab .icon,
-#restoreSession .icon
+#restoreSession .icon,
+#restoreCrash .icon
 {
   background-position: -18px -17px;
 }
