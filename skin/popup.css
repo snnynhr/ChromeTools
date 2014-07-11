@@ -144,7 +144,8 @@ li li
 }
 
 #restoreTab.hide,
-#restoreSession.hide
+#restoreSession.hide,
+#restoreCrash.hide
 {
   display: none;
 }
@@ -186,10 +187,6 @@ footer
 
 footer:hover
 {
-  background: -moz-linear-gradient(top, rgba(70, 50, 0, 0.1), rgba(70, 50, 0, 0.1)),
-    url(background-main.png);
-  background: -webkit-linear-gradient(top, rgba(70, 50, 0, 0.1), rgba(70, 50, 0, 0.1)),
-    url(background-main.png);
   background: linear-gradient(to bottom, rgba(70, 50, 0, 0.1), rgba(70, 50, 0, 0.1)),
     url(background-main.png);
 }

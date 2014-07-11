@@ -24,6 +24,7 @@ body
   margin-left: -10px;
   font-size: 65px;
   top: 25px;
+  text-shadow: 2px 2px 2px #888888;
 }
 #list
 {
@@ -52,5 +53,29 @@ body
 }
 #history, #cookies
 {
-  width: 700px;
+  width: 600px;
+  border: 2px solid #D17B0A;
+  box-shadow: 5px 5px 5px #888888;
+}
+.input
+{
+  border: 2px solid #D17B0A;
+  box-shadow: 5px 5px 5px #888888; 
+}
+/* Button */
+.button
+{
+  width: 100px;
+  border:1px solid #72021c;
+  border-radius: 3px;
+  font-family: arial, helvetica, sans-serif; 
+  padding: 3px 3px 3px 3px;
+  display:inline-block;
+  font-weight:bold; 
+  color: #000000;
+  background-color: #FF950A; 
+  box-shadow: 3px 3px 5px #888888;
+}
+.button:hover{
+ background-color: #D17B0A;
 }

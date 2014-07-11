@@ -10,7 +10,7 @@ function togglePopups()
 {
 	if(document.getElementById("popup").classList.contains("off"))
 	{
-		chrome.contentSettings['popups'].set({
+		chrome.contentSettings.popups.set({
 		        'primaryPattern': '<all_urls>',
 		        'setting': 'block'
 		      });
@@ -19,7 +19,7 @@ function togglePopups()
 	}
 	else
 	{
-		chrome.contentSettings['popups'].set({
+		chrome.contentSettings.popups.set({
 		        'primaryPattern': '<all_urls>',
 		        'setting': 'allow'
 		      });
@@ -31,7 +31,7 @@ function toggleCookies()
 {
 	if(document.getElementById("cookies").classList.contains("off"))
 	{
-		chrome.contentSettings['cookies'].set({
+		chrome.contentSettings.cookies.set({
 		        'primaryPattern': '<all_urls>',
 		        'setting': 'allow'
 		      });
@@ -40,7 +40,7 @@ function toggleCookies()
 	}
 	else
 	{
-		chrome.contentSettings['cookies'].set({
+		chrome.contentSettings.cookies.set({
 		        'primaryPattern': '<all_urls>',
 		        'setting': 'block'
 		      });
@@ -126,53 +126,53 @@ function toggleAutofill()
 }
 function clearHistory()
 {
-	var curr = JSON.parse(localStorage.getItem("historyWL"));
-	chrome.history.search({text: ""}, function(arr)
+	if(confirm("Clear History?"))
 	{
-		for(var i = 0; i<arr.length; i++)
+		var curr = JSON.parse(localStorage.getItem("historyWL"));
+		chrome.history.search({text: ""}, function(arr)
 		{
-			var url = arr[i].url;
-			var n = url.search("://");
-			if(n >= 0)
-				url = url.substring(n+3);
-			var m = url.search("/");
-			url = url.substring(0,m);
-			
-			var flag = true;
-			for(var j=0; j<curr.length; j++)
-				if(curr[j]==url)
-				{
-					flag = false;
-					break;
-				}
-			if(flag)
-				chrome.history.deleteURL(arr[i].url);
-		}
-	});
-	/*
-	chrome.history.deleteAll(function()
-	{
-		localStorage.setItem("historyFlag",0);
-		document.getElementById("clrhistory").innerHTML = '<div class="icon"></div><span> History Cleared </span>';
-	});*/
+			for(var i = 0; i<arr.length; i++)
+			{
+				var url = arr[i].url;
+				var n = url.search("://");
+				if(n >= 0)
+					url = url.substring(n+3);
+				var m = url.search("/");
+				url = url.substring(0,m);
+				
+				var flag = true;
+				for(var j=0; j<curr.length; j++)
+					if(curr[j]==url)
+					{
+						flag = false;
+						break;
+					}
+				if(flag)
+					chrome.history.deleteURL(arr[i].url);
+			}
+		});
+	}
 }
 function clearCookies()
 {
-	var curr = JSON.parse(localStorage.getItem("cookiesWL"));
-	chrome.cookies.getAll({}, function(arr) {
-			for(var i = 0; i<arr.length; i++)
-			{
-				var flag = true;
-				for(var j=0; j<curr.length; j++)
-					if(curr[j]==arr[i].domain)
-						flag = false;
-				if(flag)
-					chrome.cookies.remove({url:"http"+(a.secure?"s":"")+"://"+a.domain+a.path,name:a.name,storeId:a.storeId});
+	if(confirm("Clear Cookies?"))
+	{
+		var curr = JSON.parse(localStorage.getItem("cookiesWL"));
+		chrome.cookies.getAll({}, function(arr) {
+				for(var i = 0; i<arr.length; i++)
+				{
+					var flag = true;
+					for(var j=0; j<curr.length; j++)
+						if(curr[j]==arr[i].domain)
+							flag = false;
+					if(flag)
+						chrome.cookies.remove({url:"http"+(a.secure?"s":"")+"://"+a.domain+a.path,name:a.name,storeId:a.storeId});
+				}
 			}
-		}
-	);
-	localStorage.setItem("cookiesFlag",0);
-	document.getElementById("clrcookies").innerHTML = '<div class="icon"></div><span> Cleared </span>';
+		);
+		localStorage.setItem("cookiesFlag",0);
+		document.getElementById("clrcookies").innerHTML = '<div class="icon"></div><span> Cleared </span>';
+	}
 }
 function saveTab()
 {
@@ -197,11 +197,11 @@ function restoreTab()
 	if(curr.length > 0)
 	{
 		c = curr.pop();
-		if(curr.length ==0)
+		if(curr.length === 0)
 			document.getElementById("restoreTab").classList.add("hide");
 		chrome.windows.get(c[0],{},function(windows)
 		{
-			if(windows == undefined || windows.id == chrome.windows.WINDOW_ID_NONE)
+			if(windows === undefined || windows.id == chrome.windows.WINDOW_ID_NONE)
 			{
 				chrome.windows.create({url: c[2]}, function(win)
 					{
@@ -241,7 +241,7 @@ function saveSession()
 			    c.active,
 			    c.pinned];
 	    	session[session.length] = data;
-	    	chrome.tabs.remove(c.id, function() {});
+	    	chrome.tabs.remove(c.id);
 		}
 		curr[curr.length] = session;
 		localStorage.setItem("sessionStack",JSON.stringify(curr));
@@ -254,7 +254,7 @@ function restoreSession()
 	if(curr.length > 0)
 	{
 		c = curr.pop();
-		if(curr.length == 0)
+		if(curr.length === 0)
 			document.getElementById("restoreSession").classList.add("hide");
 		localStorage.setItem("sessionStack",JSON.stringify(curr));
 		chrome.windows.create({}, function(win)
@@ -270,7 +270,7 @@ function restoreSession()
 							url: c[i][2],
 							active: c[i][3],
 							pinned: c[i][4],
-						},  function(){});
+						});
 						chrome.tabs.remove(t.id);
 					}
 				});
@@ -417,7 +417,7 @@ function init()
     });
 	
 	var hd = localStorage.getItem("hd");
-	if (hd == null)
+	if (hd === null)
 	{
 		hd = "on";
 		localStorage.setItem("hd",hd);
@@ -434,7 +434,7 @@ function init()
 	}
 
 	var ytQuality = localStorage.getItem("ytQuality");
-	if (ytQuality == null)
+	if (ytQuality === null)
 	{
 		ytQuality = "highres";
 		localStorage.setItem("ytQuality","highres");
@@ -450,7 +450,7 @@ function init()
 		elem.innerHTML = "Maximum";
 
 	var co = localStorage.getItem("cookiesFlag");
-	if(co == null)
+	if(co === null)
 	{
 		co = "1";
 		localStorage.setItem("cookiesFlag",co);
@@ -468,7 +468,7 @@ function init()
 
 	/* Init Clear history */
 	var hist = localStorage.getItem("historyFlag");
-	if(hist == null)
+	if(hist === null)
 	{
 		hist = "1";
 		localStorage.setItem("historyFlag",hist);
@@ -509,18 +509,19 @@ function init()
 	
 	/* Init restore tab */
 	var tabStack = JSON.parse(localStorage.getItem("tabStack"));
-	if(tabStack.length == 0)
+	if(tabStack.length === 0)
 		document.getElementById("restoreTab").classList.add("hide");
 	else
 		document.getElementById("restoreTab").classList.remove("hide");
 
 	/* Init restore session */
 	var sessionStack = JSON.parse(localStorage.getItem("sessionStack"));
-	if(sessionStack.length == 0)
+	if(sessionStack.length === 0)
 		document.getElementById("restoreSession").classList.add("hide");
 	else
 		document.getElementById("restoreSession").classList.remove("hide");
 
+	document.getElementById("restoreCrash").classList.add("hide");
 	/* Click Event Listeners */
 	document.getElementById("popup").addEventListener("click",togglePopups);
 	document.getElementById("cookies").addEventListener("click",toggleCookies);
