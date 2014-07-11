@@ -531,7 +531,7 @@
 			"file": "background.js",
 			"settings":
 			{
-				"buffer_size": 3447,
+				"buffer_size": 3457,
 				"line_ending": "Windows"
 			}
 		},
@@ -587,7 +587,7 @@
 			"file": "youtube.js",
 			"settings":
 			{
-				"buffer_size": 1603,
+				"buffer_size": 1604,
 				"line_ending": "Windows"
 			}
 		}
@@ -687,10 +687,15 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Sunny Nahar/Desktop/Computer Science/Chrome Extensions/ChromeTools/manifest.json",
+		"/C/Users/Sunny Nahar/Desktop/Computer Science/Chrome Extensions/ChromeTools/youtube.js",
+		"/C/Users/Sunny Nahar/Desktop/Computer Science/Chrome Extensions/ChromeTools/skin/popup.css",
+		"/C/Users/Sunny Nahar/Desktop/Computer Science/Chrome Extensions/ChromeTools/popup.html",
+		"/C/Users/Sunny Nahar/Desktop/Computer Science/Chrome Extensions/ChromeTools/popup.js",
 		"/C/Users/Sunny Nahar/Desktop/Computer Science/Chrome Extensions/ChromeTools/skin/options.css",
 		"/C/Users/Sunny Nahar/Desktop/Computer Science/Chrome Extensions/ChromeTools/options.html",
-		"/C/Users/Sunny Nahar/Desktop/Computer Science/Chrome Extensions/ChromeTools/skin/popup.css",
-		"/C/Users/Sunny Nahar/Desktop/Computer Science/Chrome Extensions/ChromeTools/popup.js",
+		"/C/Users/Sunny Nahar/Desktop/Computer Science/Chrome Extensions/ChromeTools/options.js",
+		"/C/Users/Sunny Nahar/Desktop/Computer Science/Chrome Extensions/ChromeTools/background.js",
 		"/C/Users/Sunny Nahar/Desktop/Computer Science/Chrome Extensions/YouTubeTracker/popup.js",
 		"/C/Users/Sunny Nahar/Desktop/Computer Science/Chrome Extensions/YouTubeTracker/skin/options.css",
 		"/C/Users/Sunny Nahar/AppData/Roaming/Sublime Text 3/Packages/User/SublimeLinter.sublime-settings",
@@ -698,16 +703,11 @@
 		"/C/Users/Sunny Nahar/Desktop/Computer Science/Chrome Extensions/ChromeTools/update.bat",
 		"/C/Users/Sunny Nahar/Desktop/Computer Science/Chrome Extensions/YouTubeTracker/options.html",
 		"/C/Users/Sunny Nahar/Desktop/School/CMU 2013-2014/15-213/tsh.c",
-		"/C/Users/Sunny Nahar/Desktop/Computer Science/Chrome Extensions/ChromeTools/options.js",
 		"/C/Users/Sunny Nahar/Desktop/Computer Science/Chrome Extensions/YouTubeTracker/popup.html",
 		"/C/Users/Sunny Nahar/Desktop/Computer Science/Chrome Extensions/YouTubeTracker/skin/popup.css",
-		"/C/Users/Sunny Nahar/Desktop/Computer Science/Chrome Extensions/ChromeTools/youtube.js",
 		"/C/Users/Sunny Nahar/Desktop/Computer Science/Chrome Extensions/YouTubeTracker/youtube.js",
 		"/C/Users/Sunny Nahar/AppData/Local/Google/Chrome/User Data/Default/File System/012/t/00/00000000",
 		"/C/Users/Sunny Nahar/AppData/Local/Google/Chrome/User Data/Default/File System/012/t/00/00000001",
-		"/C/Users/Sunny Nahar/Desktop/Computer Science/Chrome Extensions/ChromeTools/manifest.json",
-		"/C/Users/Sunny Nahar/Desktop/Computer Science/Chrome Extensions/ChromeTools/background.js",
-		"/C/Users/Sunny Nahar/Desktop/Computer Science/Chrome Extensions/ChromeTools/popup.html",
 		"/C/Users/Sunny Nahar/Desktop/Computer Science/Chrome Extensions/YouTubeTracker/todo.txt",
 		"/C/Users/Sunny Nahar/VirtualBox VMs/RHEL64/RHEL64.vbox-prev",
 		"/C/Users/Sunny Nahar/.VirtualBox/VirtualBox.xml-prev",
@@ -832,6 +832,7 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"==",
 			"dup2",
 			"2px",
 			"10px",
@@ -958,8 +959,7 @@
 			"PACK",
 			"PUT",
 			"2 1",
-			"impossible",
-			"impossible i"
+			"impossible"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1005,8 +1005,8 @@
 						"selection":
 						[
 							[
-								137,
-								137
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1031,7 +1031,7 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3447,
+						"buffer_size": 3457,
 						"regions":
 						{
 						},
@@ -1055,7 +1055,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 8,
 					"type": "text"
 				},
 				{
@@ -1071,8 +1071,8 @@
 						"selection":
 						[
 							[
-								0,
-								0
+								3676,
+								3676
 							]
 						],
 						"settings":
@@ -1084,10 +1084,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1657.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
@@ -1103,8 +1103,8 @@
 						"selection":
 						[
 							[
-								0,
-								0
+								1792,
+								1792
 							]
 						],
 						"settings":
@@ -1116,10 +1116,10 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 415.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
@@ -1135,23 +1135,24 @@
 						"selection":
 						[
 							[
-								0,
-								0
+								1243,
+								1243
 							]
 						],
 						"settings":
 						{
+							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
 							"syntax": "Packages/CSS/CSS.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.x": -0.0,
+						"translation.y": 829.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
@@ -1183,7 +1184,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
@@ -1199,8 +1200,8 @@
 						"selection":
 						[
 							[
-								0,
-								0
+								2739,
+								2739
 							]
 						],
 						"settings":
@@ -1213,10 +1214,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 847.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
@@ -1232,8 +1233,8 @@
 						"selection":
 						[
 							[
-								0,
-								0
+								421,
+								421
 							]
 						],
 						"settings":
@@ -1258,15 +1259,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1603,
+						"buffer_size": 1604,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								219,
+								219
 							]
 						],
 						"settings":
@@ -1282,7 +1283,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -1352,7 +1353,7 @@
 		[
 			[
 				"",
-				"C:\\Users\\Sunny Nahar\\Desktop\\Computer Science\\Chrome Extensions\\ChromeTools.sublime-workspace"
+				"C:\\Users\\Sunny Nahar\\Desktop\\Computer Science\\Chrome Extensions\\YouTubeTracker\\YouTubeTracker.sublime-project"
 			]
 		],
 		"width": 380.0

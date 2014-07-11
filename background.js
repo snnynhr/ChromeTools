@@ -1,46 +1,46 @@
 /* Init localStorage */
 var cwl = localStorage.getItem("cookiesWL");
-if(cwl == null)
+if(cwl === null)
 {
     localStorage.setItem("cookiesWL",JSON.stringify([]));
 }
 var hwl = localStorage.getItem("historyWL");
-if(hwl == null)
+if(hwl === null)
 {
     localStorage.setItem("historyWL",JSON.stringify([]));
 }
 var s = localStorage.getItem("tabStack");
-if(s == null)
+if(s === null)
 {
     localStorage.setItem("tabStack",JSON.stringify([]));
 }
 var ss = localStorage.getItem("sessionStack");
-if(ss == null)
+if(ss === null)
 {
     localStorage.setItem("sessionStack",JSON.stringify([]));
 }
 var c = localStorage.getItem("cookiesFlag");
-if(c == null)
+if(c === null)
 {
     localStorage.setItem("cookiesFlag",1);
 }
 var h = localStorage.getItem("historyFlag");
-if(h == null)
+if(h === null)
 {
     localStorage.setItem("historyFlag",1);
 }
 var hd = localStorage.getItem("hd");
-if(hd == null)
+if(hd === null)
 {
     localStorage.setItem("hd","on");
 }
 var ytSize = localStorage.getItem("ytSize");
-if(ytSize == null)
+if(ytSize === null)
 {
     localStorage.setItem("ytSize","1");
 }
 var ytQuality = localStorage.getItem("ytQuality");
-if(ytQuality == null)
+if(ytQuality === null)
 {
     localStorage.setItem("ytQuality","highres");
 }
@@ -91,7 +91,7 @@ chrome.tabs.onRemoved.addListener(function(tabId,removeInfo){
 
 chrome.tabs.onUpdated.addListener(function(tabId,info,tab)
 {
-    if(info.url != undefined)
+    if(info.url !== undefined)
     {
         console.log(tabId + " " + info.url);
         curr = JSON.parse(localStorage.getItem("chromeSession"));
