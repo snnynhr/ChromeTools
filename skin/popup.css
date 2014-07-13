@@ -1,8 +1,20 @@
+@font-face {
+  font-family: 'RobotoCondensed';
+  font-style: normal;
+  src: url(fonts/RobotoCondensed-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'RobotoCondensed-Bold';
+  font-style: normal;
+  src: url(fonts/RobotoCondensed-Bold.ttf);
+}
+
 body
 {
   min-width: 250px;
   margin: 0px;
-  font-family: Segoe UI, Arial, sans-serif;
+  font-family: RobotoCondensed, Arial, sans-serif;
   font-size: 13px;
   color: #545454;
   background-color: #f8f6f2;
@@ -174,6 +186,7 @@ li li
   position: absolute;
   right: 20px;
   font-weight: bold;
+  font-family: RobotoCondensed-Bold;
 }
 
 /* Footer */

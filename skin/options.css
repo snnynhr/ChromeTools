@@ -1,17 +1,35 @@
+@font-face {
+  font-family: 'RobotoCondensed';
+  font-style: normal;
+  src: url(fonts/RobotoCondensed-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'RobotoCondensed-Bold';
+  font-style: normal;
+  src: url(fonts/RobotoCondensed-Bold.ttf);
+}
+
+@font-face {
+  font-family: 'Walkway';
+  font-style: normal;
+  src: url("fonts/Walkway Black.ttf");
+}
+
 header
 {
   margin-top: 0px;
   height: 170px;
   margin-bottom: 20px;
   border-bottom: 3px solid #e1ddd8;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Walkway, Arial, Helvetica, sans-serif;
   text-align: center;
 }
 
 body
 {
   min-width: 250px;
-  font-family: Segoe UI, Arial, sans-serif;
+  font-family: Walkway, RobotoCondensed, Arial, sans-serif;
   font-size: 13px;
   color: #545454;
   background-color: #f8f6f2;
