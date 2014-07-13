@@ -13,7 +13,7 @@
 @font-face {
   font-family: 'Walkway';
   font-style: normal;
-  src: url("fonts/Walkway Black.ttf");
+  src: url("fonts/LondonBetween.ttf");
 }
 
 header
@@ -29,7 +29,7 @@ header
 body
 {
   min-width: 250px;
-  font-family: Walkway, RobotoCondensed, Arial, sans-serif;
+  font-family: RobotoCondensed, Arial, sans-serif;
   font-size: 13px;
   color: #545454;
   background-color: #f8f6f2;
@@ -86,7 +86,7 @@ body
   width: 100px;
   border:1px solid #72021c;
   border-radius: 3px;
-  font-family: arial, helvetica, sans-serif; 
+  font-family: RobotoCondensed-Bold, arial, helvetica, sans-serif; 
   padding: 3px 3px 3px 3px;
   display:inline-block;
   font-weight:bold; 
