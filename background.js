@@ -102,7 +102,7 @@ chrome.tabs.onUpdated.addListener(function(tabId,info,tab)
                 break;
             }
         localStorage.setItem("chromeSession",JSON.stringify(curr));
-    }  
+    }
 });
 
 /* Cookies listener */
@@ -119,14 +119,14 @@ chrome.history.onVisited.addListener(function (item)
 
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
-    console.log(sender.tab ?
-                "from a content script:" + sender.tab.url :
-                "from the extension");
+    //console.log(sender.tab ?
+    //            "from a content script:" + sender.tab.url :
+    //            "from the extension");
     if(request.msg == "getSettings")
     {
     	var en = localStorage.getItem("hd") == "on" ? "1" : "0";
         var ytSize = localStorage.getItem("ytSize");
-        var ytQuality = localStorage.getItem("ytQuality"); 
+        var ytQuality = localStorage.getItem("ytQuality");
     	sendResponse({ytQuality: ytQuality, ytSize: ytSize, enabled: en});
     }
     else

@@ -11,7 +11,7 @@
 }
 
 @font-face {
-  font-family: 'Walkway';
+  font-family: 'London';
   font-style: normal;
   src: url("fonts/LondonBetween.ttf");
 }
@@ -22,7 +22,7 @@ header
   height: 170px;
   margin-bottom: 20px;
   border-bottom: 3px solid #e1ddd8;
-  font-family: Walkway, Arial, Helvetica, sans-serif;
+  font-family: London, Arial, Helvetica, sans-serif;
   text-align: center;
 }
 
@@ -78,7 +78,7 @@ body
 .input
 {
   border: 2px solid #D17B0A;
-  box-shadow: 5px 5px 5px #888888; 
+  box-shadow: 5px 5px 5px #888888;
 }
 /* Button */
 .button
@@ -86,12 +86,12 @@ body
   width: 100px;
   border:1px solid #72021c;
   border-radius: 3px;
-  font-family: RobotoCondensed-Bold, arial, helvetica, sans-serif; 
+  font-family: RobotoCondensed-Bold, arial, helvetica, sans-serif;
   padding: 3px 3px 3px 3px;
   display:inline-block;
-  font-weight:bold; 
+  font-weight:bold;
   color: #000000;
-  background-color: #FF950A; 
+  background-color: #FF950A;
   box-shadow: 3px 3px 5px #888888;
 }
 .button:hover{
