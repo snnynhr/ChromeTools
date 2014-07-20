@@ -3,7 +3,7 @@
 
   "name": "ChromeTools",
   "description": "ChromeTools",
-  "version": "0.0.3.2",
+  "version": "0.0.3.3",
   "permissions": [
   "tabs",
 	"activeTab",
@@ -14,9 +14,9 @@
   "history",
   "privacy",
   "contentSettings",
-  "webNavigation", 
-  "webRequest", 
-  "webRequestBlocking", 
+  "webNavigation",
+  "webRequest",
+  "webRequestBlocking",
   "storage"
   ],
   "browser_action": {

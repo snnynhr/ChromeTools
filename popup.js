@@ -100,7 +100,6 @@ function togglePrefetch()
 }
 function toggleAutofill()
 {
-	
 	if(document.getElementById("autofill").classList.contains("off"))
 	{
 		chrome.privacy.services.autofillEnabled.get({}, function(details) {
@@ -121,7 +120,32 @@ function toggleAutofill()
 			else
 				document.getElementById("autofill-text").innerHTML = "Error";
 			});
-		});	
+		});
+	}
+}
+function toggleSearchSuggest()
+{
+	if(document.getElementById("searchsuggest").classList.contains("off"))
+	{
+		chrome.privacy.services.searchSuggestEnabled.get({}, function(details) {
+			chrome.privacy.services.searchSuggestEnabled.set({ value: true }, function() {
+			if (chrome.runtime.lastError === undefined)
+				document.getElementById("searchsuggest").classList.remove("off");
+			else
+				document.getElementById("searchsuggest-text").innerHTML = "Error";
+			});
+		});
+	}
+	else
+	{
+		chrome.privacy.services.searchSuggestEnabled.get({}, function(details) {
+			chrome.privacy.services.searchSuggestEnabled.set({ value: false }, function() {
+			if (chrome.runtime.lastError === undefined)
+				document.getElementById("searchsuggest").classList.add("off");
+			else
+				document.getElementById("searchsuggest-text").innerHTML = "Error";
+			});
+		});
 	}
 }
 function clearHistory()
@@ -139,7 +163,7 @@ function clearHistory()
 					url = url.substring(n+3);
 				var m = url.search("/");
 				url = url.substring(0,m);
-				
+
 				var flag = true;
 				for(var j=0; j<curr.length; j++)
 					if(curr[j]==url)
@@ -274,7 +298,7 @@ function restoreSession()
 						chrome.tabs.remove(t.id);
 					}
 				});
-			
+
 		});
 	}
 }
@@ -371,7 +395,7 @@ function addHistory(e)
     });
 }
 function options()
-{	
+{
 	chrome.tabs.create({url: "options.html"}, function() {});
 }
 function init()
@@ -388,8 +412,8 @@ function init()
           	function(details) {
             	if(details.setting=="allow")
             	{
- 					document.getElementById("popup").classList.add("off");  
- 					document.getElementById("popup-text").innerHTML = "Popup Blocker Off";         	
+ 					document.getElementById("popup").classList.add("off");
+ 					document.getElementById("popup-text").innerHTML = "Popup Blocker Off";
             	}
             	else
             	{
@@ -405,9 +429,9 @@ function init()
             	if(details.setting=="block")
             	{
  					document.getElementById("cookies").classList.add("off");
- 					document.getElementById("cookies-text").innerHTML = "Cookies Disabled";         	
+ 					document.getElementById("cookies-text").innerHTML = "Cookies Disabled";
             	}
-            	else 
+            	else
             	{
             		document.getElementById("cookies").classList.remove("off");
             		document.getElementById("cookies-text").innerHTML = "Cookies Enabled";
@@ -415,7 +439,7 @@ function init()
         });
 
     });
-	
+
 	var hd = localStorage.getItem("hd");
 	if (hd === null)
 	{
@@ -483,30 +507,37 @@ function init()
 		document.getElementById("clrhistory").classList.remove("off");
 		document.getElementById("clrhistory-text").innerHTML = "History Cleared";
 	}
-	
+
 	chrome.privacy.websites.referrersEnabled.get({}, function(details) {
 		if (details.value)
 			document.getElementById("dnt").classList.remove("off");
 		else
 			document.getElementById("dnt").classList.add("off");
 	});
-	
-	
+
+
 	chrome.privacy.network.networkPredictionEnabled.get({}, function(details) {
 		if (details.value)
 			document.getElementById("prefetch").classList.remove("off");
 		else
 			document.getElementById("prefetch").classList.add("off");
 	});
-	
-	
+
+
 	chrome.privacy.services.autofillEnabled.get({}, function(details) {
 		if (details.value)
 			document.getElementById("autofill").classList.remove("off");
 		else
 			document.getElementById("autofill").classList.add("off");
 	});
-	
+
+	chrome.privacy.services.searchSuggestEnabled.get({}, function(details) {
+		if (details.value)
+			document.getElementById("searchsuggest").classList.remove("off");
+		else
+			document.getElementById("searchsuggest").classList.add("off");
+	});
+
 	/* Init restore tab */
 	var tabStack = JSON.parse(localStorage.getItem("tabStack"));
 	if(tabStack.length === 0)
@@ -528,6 +559,7 @@ function init()
 	document.getElementById("dnt").addEventListener("click",toggleDNT);
 	document.getElementById("prefetch").addEventListener("click",togglePrefetch);
 	document.getElementById("autofill").addEventListener("click",toggleAutofill);
+	document.getElementById("searchsuggest").addEventListener("click",toggleSearchSuggest);
 	document.getElementById("clrcookies").addEventListener("click",clearCookies);
 	document.getElementById("clrcookies-add").addEventListener("click", addCookie);
 	document.getElementById("clrhistory").addEventListener("click",clearHistory);
