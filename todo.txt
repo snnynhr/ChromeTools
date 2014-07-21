@@ -1,1 +1,2 @@
-1. Crash restore
+1. Crash restore - synchronous storage
+2. Fix privacy settings bug - get method not returning on second popup press
