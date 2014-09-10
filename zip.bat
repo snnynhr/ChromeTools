@@ -1,0 +1,2 @@
+DEL ChromeTools.zip
+"C:\Program Files\7-Zip\7z.exe" a ChromeTools.zip icons/ skin/ util/ background.html background.js ChromeTools.crx hulu.js manifest.json options.html options.js popup.html popup.js README.md todo.txt update.bat youtube.js zip.bat
