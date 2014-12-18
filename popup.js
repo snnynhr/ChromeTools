@@ -2,7 +2,6 @@ function debug(message)
 {
     chrome.extension.sendMessage({msg: message});
 }
-debug('initiated');
 function test()
 {
     debug('clicked');
@@ -54,24 +53,22 @@ function toggleDNT()
     if (document.getElementById('dnt').classList.contains('off'))
     {
         chrome.privacy.websites.referrersEnabled.get({}, function(details) {
-            chrome.privacy.websites.referrersEnabled.set({ value: true },
-            function() {
-                if (chrome.runtime.lastError === undefined)
-                    document.getElementById('dnt').classList.remove('off');
-                else
-                    document.getElementById('dnt-text').innerHTML = 'Error';
+            chrome.privacy.websites.referrersEnabled.set({ value: true }, function() {
+            if (chrome.runtime.lastError === undefined)
+                document.getElementById('dnt').classList.remove('off');
+            else
+                document.getElementById('dnt-text').innerHTML = 'Error';
             });
         });
     }
     else
     {
         chrome.privacy.websites.referrersEnabled.get({}, function(details) {
-            chrome.privacy.websites.referrersEnabled.set({ value: false },
-            function() {
-                if (chrome.runtime.lastError === undefined)
-                    document.getElementById('dnt').classList.add('off');
-                else
-                    document.getElementById('dnt-text').innerHTML = 'Error';
+            chrome.privacy.websites.referrersEnabled.set({ value: false }, function() {
+            if (chrome.runtime.lastError === undefined)
+                document.getElementById('dnt').classList.add('off');
+            else
+                document.getElementById('dnt-text').innerHTML = 'Error';
             });
         });
     }
@@ -80,10 +77,8 @@ function togglePrefetch()
 {
     if (document.getElementById('prefetch').classList.contains('off'))
     {
-        chrome.privacy.network.networkPredictionEnabled.get({},
-        function(details) {
-            chrome.privacy.network.networkPredictionEnabled.set({ value: true },
-            function() {
+        chrome.privacy.network.networkPredictionEnabled.get({}, function(details) {
+            chrome.privacy.network.networkPredictionEnabled.set({ value: true }, function() {
             if (chrome.runtime.lastError === undefined)
                 document.getElementById('prefetch').classList.remove('off');
             else
@@ -93,10 +88,8 @@ function togglePrefetch()
     }
     else
     {
-        chrome.privacy.network.networkPredictionEnabled.get({},
-        function(details) {
-            chrome.privacy.network.networkPredictionEnabled.set({value: false},
-            function() {
+        chrome.privacy.network.networkPredictionEnabled.get({}, function(details) {
+            chrome.privacy.network.networkPredictionEnabled.set({ value: false }, function() {
             if (chrome.runtime.lastError === undefined)
                 document.getElementById('prefetch').classList.add('off');
             else
@@ -110,26 +103,22 @@ function toggleAutofill()
     if (document.getElementById('autofill').classList.contains('off'))
     {
         chrome.privacy.services.autofillEnabled.get({}, function(details) {
-            chrome.privacy.services.autofillEnabled.set({ value: true },
-            function() {
-                if (chrome.runtime.lastError === undefined)
-                    document.getElementById('autofill').classList.remove('off');
-                else
-                    document.getElementById('autofill-text').innerHTML =
-                        'Error';
+            chrome.privacy.services.autofillEnabled.set({ value: true }, function() {
+            if (chrome.runtime.lastError === undefined)
+                document.getElementById('autofill').classList.remove('off');
+            else
+                document.getElementById('autofill-text').innerHTML = 'Error';
             });
         });
     }
     else
     {
         chrome.privacy.services.autofillEnabled.get({}, function(details) {
-            chrome.privacy.services.autofillEnabled.set({ value: false },
-            function() {
-                if (chrome.runtime.lastError === undefined)
-                    document.getElementById('autofill').classList.add('off');
-                else
-                    document.getElementById('autofill-text').innerHTML =
-                        'Error';
+            chrome.privacy.services.autofillEnabled.set({ value: false }, function() {
+            if (chrome.runtime.lastError === undefined)
+                document.getElementById('autofill').classList.add('off');
+            else
+                document.getElementById('autofill-text').innerHTML = 'Error';
             });
         });
     }
@@ -138,28 +127,23 @@ function toggleSearchSuggest()
 {
     if (document.getElementById('searchsuggest').classList.contains('off'))
     {
-        chrome.privacy.services.searchSuggestEnabled.get({},
-        function(details) {
-            chrome.privacy.services.searchSuggestEnabled.set({ value: true },
-            function() {
+        chrome.privacy.services.searchSuggestEnabled.get({}, function(details) {
+            chrome.privacy.services.searchSuggestEnabled.set({ value: true }, function() {
             if (chrome.runtime.lastError === undefined)
                 document.getElementById('searchsuggest').classList.remove('off');
             else
-                document.getElementById('searchsuggest-text').innerHTML =
-                    'Error';
-        });
+                document.getElementById('searchsuggest-text').innerHTML = 'Error';
+            });
         });
     }
     else
     {
         chrome.privacy.services.searchSuggestEnabled.get({}, function(details) {
-            chrome.privacy.services.searchSuggestEnabled.set({ value: false },
-            function() {
-                if (chrome.runtime.lastError === undefined)
-                    document.getElementById('searchsuggest').classList.add('off');
-                else
-                    document.getElementById('searchsuggest-text').innerHTML =
-                        'Error';
+            chrome.privacy.services.searchSuggestEnabled.set({ value: false }, function() {
+            if (chrome.runtime.lastError === undefined)
+                document.getElementById('searchsuggest').classList.add('off');
+            else
+                document.getElementById('searchsuggest-text').innerHTML = 'Error';
             });
         });
     }
@@ -169,7 +153,7 @@ function clearHistory()
     if (confirm('Clear History?'))
     {
         var curr = JSON.parse(localStorage.getItem('historyWL'));
-        chrome.history.search({text: ''}, function(arr)
+        chrome.history.search({text: ""}, function(arr)
         {
             for (var i = 0; i < arr.length; i++)
             {
@@ -206,15 +190,12 @@ function clearCookies()
                         if (curr[j] == arr[i].domain)
                             flag = false;
                     if (flag)
-                        chrome.cookies.remove({url: 'http' +
-                            (a.secure ? 's' : ')' + ':' + a.domain + a.path,
-                            name : a.name, storeId : a.storeId});
+                        chrome.cookies.remove({url: 'http' + (a.secure ? 's' : "") + '://' + a.domain + a.path, name: a.name, storeId: a.storeId});
                 }
             }
         );
         localStorage.setItem('cookiesFlag', 0);
-        document.getElementById('clrcookies').innerHTML =
-            '<div class="icon"></div><span> Cleared </span>';
+        document.getElementById('clrcookies').innerHTML = '<div class="icon"></div><span> Cleared </span>';
     }
 }
 function saveTab()
@@ -242,10 +223,9 @@ function restoreTab()
         c = curr.pop();
         if (curr.length === 0)
             document.getElementById('restoreTab').classList.add('hide');
-        chrome.windows.get(c[0], {}, function(windows)
+        chrome.windows.get(c[0], {},function(windows)
         {
-            if (windows === undefined ||
-                windows.id == chrome.windows.WINDOW_ID_NONE)
+            if (windows === undefined || windows.id == chrome.windows.WINDOW_ID_NONE)
             {
                 chrome.windows.create({url: c[2]}, function(win)
                     {
@@ -420,7 +400,6 @@ function options()
 }
 function init()
 {
-    debug('Initializing popup menu');
     /* Initialize settings */
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         var current = tabs[0];
@@ -434,14 +413,12 @@ function init()
                 if (details.setting == 'allow')
                 {
                     document.getElementById('popup').classList.add('off');
-                    document.getElementById('popup-text').innerHTML =
-                        'Popup Blocker Off';
+                    document.getElementById('popup-text').innerHTML = 'Popup Blocker Off';
                 }
                 else
                 {
                     document.getElementById('popup').classList.remove('off');
-                    document.getElementById('popup-text').innerHTML =
-                        'Popup Blocker On';
+                    document.getElementById('popup-text').innerHTML = 'Popup Blocker On';
                 }
         });
         chrome.contentSettings.cookies.get({
@@ -452,14 +429,12 @@ function init()
                 if (details.setting == 'block')
                 {
                     document.getElementById('cookies').classList.add('off');
-                    document.getElementById('cookies-text').innerHTML =
-                        'Cookies Disabled';
+                    document.getElementById('cookies-text').innerHTML = 'Cookies Disabled';
                 }
                 else
                 {
                     document.getElementById('cookies').classList.remove('off');
-                    document.getElementById('cookies-text').innerHTML =
-                        'Cookies Enabled';
+                    document.getElementById('cookies-text').innerHTML = 'Cookies Enabled';
                 }
         });
 
@@ -512,8 +487,7 @@ function init()
     else
     {
         document.getElementById('clrcookies').classList.remove('off');
-        document.getElementById('clrcookies-text').innerHTML =
-            'Cookies Cleared';
+        document.getElementById('clrcookies-text').innerHTML = 'Cookies Cleared';
     }
 
     /* Init Clear history */
@@ -531,8 +505,7 @@ function init()
     else
     {
         document.getElementById('clrhistory').classList.remove('off');
-        document.getElementById('clrhistory-text').innerHTML =
-            'History Cleared';
+        document.getElementById('clrhistory-text').innerHTML = 'History Cleared';
     }
 
     chrome.privacy.websites.referrersEnabled.get({}, function(details) {
@@ -584,31 +557,20 @@ function init()
     document.getElementById('popup').addEventListener('click', togglePopups);
     document.getElementById('cookies').addEventListener('click', toggleCookies);
     document.getElementById('dnt').addEventListener('click', toggleDNT);
-    document.getElementById('prefetch').addEventListener('click',
-        togglePrefetch);
-    document.getElementById('autofill').addEventListener('click',
-        toggleAutofill);
-    document.getElementById('searchsuggest').addEventListener('click',
-        toggleSearchSuggest);
-    document.getElementById('clrcookies').addEventListener('click',
-        clearCookies);
-    document.getElementById('clrcookies-add').addEventListener('click',
-        addCookie);
-    document.getElementById('clrhistory').addEventListener('click',
-        clearHistory);
-    document.getElementById('clrhistory-add').addEventListener('click',
-        addHistory);
+    document.getElementById('prefetch').addEventListener('click', togglePrefetch);
+    document.getElementById('autofill').addEventListener('click', toggleAutofill);
+    document.getElementById('searchsuggest').addEventListener('click', toggleSearchSuggest);
+    document.getElementById('clrcookies').addEventListener('click', clearCookies);
+    document.getElementById('clrcookies-add').addEventListener('click', addCookie);
+    document.getElementById('clrhistory').addEventListener('click', clearHistory);
+    document.getElementById('clrhistory-add').addEventListener('click', addHistory);
     document.getElementById('saveTab').addEventListener('click', saveTab);
     document.getElementById('restoreTab').addEventListener('click', restoreTab);
-    document.getElementById('saveSession').addEventListener('click',
-        saveSession);
-    document.getElementById('restoreSession').addEventListener('click',
-        restoreSession);
-    document.getElementById('restoreCrash').addEventListener('click',
-        restoreCrash);
+    document.getElementById('saveSession').addEventListener('click', saveSession);
+    document.getElementById('restoreSession').addEventListener('click', restoreSession);
+    document.getElementById('restoreCrash').addEventListener('click', restoreCrash);
     document.getElementById('autoHD').addEventListener('click', autoHD);
-    document.getElementById('autoHD-setting').addEventListener('click',
-        changeAutoHD);
+    document.getElementById('autoHD-setting').addEventListener('click', changeAutoHD);
     document.getElementById('options').addEventListener('click', options);
 }
 window.addEventListener('DOMContentLoaded', init, false);
