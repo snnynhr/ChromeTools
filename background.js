@@ -1,3 +1,4 @@
+console.log('Initiating background process');
 /* Init localStorage */
 var cwl = localStorage.getItem('cookiesWL');
 if (cwl === null)
@@ -96,7 +97,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, info, tab)
         console.log(tabId + ' ' + info.url);
         curr = JSON.parse(localStorage.getItem('chromeSession'));
         for (var i = 0; i < curr.length; i++)
-            if(curr[i][0] == tabId)
+            if (curr[i][0] == tabId)
             {
                 curr[i][3] = info.url;
                 break;

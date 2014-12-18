@@ -2,6 +2,7 @@ function debug(message)
 {
     chrome.extension.sendMessage({msg: message});
 }
+debug('initiated');
 function test()
 {
     debug('clicked');
@@ -228,7 +229,7 @@ function saveTab()
         c.pinned];
         var curr = JSON.parse(localStorage.getItem('tabStack'));
         curr[curr.length] = data;
-        localStorage.setItem('tabStack',JSON.stringify(curr));
+        localStorage.setItem('tabStack', JSON.stringify(curr));
         chrome.tabs.remove(c.id, function() {});
         document.getElementById('restoreTab').classList.remove('hide');
     });
@@ -419,6 +420,7 @@ function options()
 }
 function init()
 {
+    debug('Initializing popup menu');
     /* Initialize settings */
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         var current = tabs[0];
