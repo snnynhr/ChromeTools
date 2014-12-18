@@ -44,10 +44,11 @@ header
 #titleIcon
 {
   display: inline-block;
-  width: 50px;
-  height: 50px;
-  margin-top: -11px;
-  margin-right: -10px;
+  width: 40px;
+  height: 40px;
+  margin-top: -5px;
+  margin-right: -3px;
+  margin-left: 18px;
   vertical-align: top;
 }
 
