@@ -1,2 +1,2 @@
 DEL BrowserTools.zip
-"C:\Program Files\7-Zip\7z.exe" a "../BrowserTools.zip" icons/ skin/ util/ background.html background.js BrowserTools.crx hulu.js manifest.json options.html options.js popup.html popup.js README.md todo.txt update.bat youtube.js zip.bat
+"C:\Program Files\7-Zip\7z.exe" a "../BrowserTools.zip" icons/ skin/ util/ js/ background.html manifest.json options.html popup.html README.md
