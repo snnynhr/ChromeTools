@@ -40,7 +40,7 @@ function setup() {
     scriptText += (uq.toString() + '\n');
 
     if (size == '1') {
-      scriptText += 'document.cookie = 'wide = 1';';
+      scriptText += "document.cookie = 'wide = 1';";
     }
     if (settings.enabled == 1) {
       injectScript(scriptText);
