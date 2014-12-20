@@ -27,12 +27,12 @@
    "content_scripts" : [
    {
     "matches": ["*://www.youtube.com/watch*"],
-    "js": ["util/jquery.js","youtube.js"],
+    "js": ["util/jquery.js","js/youtube.js"],
     "run_at": "document_end"
    },
    {
     "matches": ["*://www.hulu.com/watch*"],
-    "js": ["util/jquery.js","hulu.js"],
+    "js": ["util/jquery.js","js/hulu.js"],
     "run_at": "document_end"
    }
    ],
