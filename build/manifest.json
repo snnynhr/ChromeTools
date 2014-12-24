@@ -3,7 +3,7 @@
 
   "name": "BrowserTools",
   "description": "BrowserTools",
-  "version": "0.0.4.0",
+  "version": "0.0.5.0",
   "permissions": [
   "tabs",
 	"activeTab",
@@ -27,12 +27,12 @@
    "content_scripts" : [
    {
     "matches": ["*://www.youtube.com/watch*"],
-    "js": ["util/jquery.js","js/youtube.min.js"],
+    "js": ["util/jquery.min.js","js/youtube.js"],
     "run_at": "document_end"
    },
    {
     "matches": ["*://www.hulu.com/watch*"],
-    "js": ["util/jquery.js","js/hulu.min.js"],
+    "js": ["util/jquery.min.js","js/hulu.js"],
     "run_at": "document_end"
    }
    ],
