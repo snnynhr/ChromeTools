@@ -4,6 +4,9 @@ CD build/
 mkdir icons
 mkdir js
 mkdir skin
+CD skin
+mkdir fonts
+CD ..
 mkdir util
 CD ..
 XCOPY icons build\icons /Y
